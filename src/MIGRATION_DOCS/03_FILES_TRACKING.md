@@ -377,6 +377,9 @@
 - [x] Admin/Setting/Crm/QuoteStatusesController.php
 - [x] Admin/Setting/Crm/WorkflowController.php
 
+### Product Controller (1 file)
+- [x] Admin/Product/ProductController.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -446,7 +449,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 343 files documented
+### Total: 344 files documented
 
 ---
 

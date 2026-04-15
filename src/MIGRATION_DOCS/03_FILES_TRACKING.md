@@ -235,6 +235,14 @@
 - [x] Materio/charts/ApexCharts.php
 - [x] Materio/charts/ChartJs.php
 
+### Cards Controllers (6 files)
+- [x] Materio/cards/CardBasic.php
+- [x] Materio/cards/CardAdvance.php
+- [x] Materio/cards/CardActions.php
+- [x] Materio/cards/CardAnalytics.php
+- [x] Materio/cards/CardStatistics.php
+- [x] Materio/cards/CardGamifications.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -285,7 +293,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 203 files documented
+### Total: 209 files documented
 
 ---
 

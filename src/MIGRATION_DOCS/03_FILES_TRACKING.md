@@ -83,7 +83,19 @@
 - [x] ReviewNotification.php
 - [x] TicketAssignedNotification.php
 
-### Total: 56 files documented
+### Core Models (5 files)
+- [x] Cruiseline.php
+- [x] Ship.php
+- [x] Port.php
+- [x] Itinerary.php
+- [x] Cruise.php
+
+### Authentication (3 files)
+- [x] User.php
+- [x] Role.php
+- [x] Permission.php
+
+### Total: 68 files documented
 
 ---
 
@@ -177,12 +189,14 @@
 | Temp Models Documented | 1 | ✅ Done |
 | Observers Documented | 3 | ✅ Done |
 | Notifications Documented | 4 | ✅ Done |
-| Models (estimated) | 18 | ⏳ Pending |
+| Core Models Documented | 5 | ✅ Done |
+| Auth Models Documented | 3 | ✅ Done |
+| Models (estimated) | 110+ remaining | ⏳ Pending |
 | Controllers (estimated) | 5+ | ⏳ Pending |
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~10.5% mapped** |
+| **Total Known/Est** | **787+** | **~12.5% mapped** |
 
 ---
 

@@ -95,10 +95,11 @@
 - [x] Role.php
 - [x] Permission.php
 
-### Jobs (1 file)
+### Jobs (2 files)
 - [x] ExploraSyncJob.php
+- [x] AiGenerationJob.php
 
-### Total: 69 files documented
+### Total: 70 files documented
 
 ---
 

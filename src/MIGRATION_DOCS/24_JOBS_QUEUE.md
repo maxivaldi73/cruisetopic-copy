@@ -10,6 +10,97 @@
 | Job | Namespace | Purpose |
 |-----|-----------|---------|
 | ExploraSyncJob | App\Jobs\Explora | Async Explora provider data sync per market |
+| AiGenerationJob | App\Jobs\Ai | Async AI content generation (descriptions, titles) |
+
+---
+
+## 🤖 AI Jobs
+
+### AiGenerationJob
+
+**Location:** `App\Jobs\Ai\AiGenerationJob`  
+**Purpose:** Async background job to trigger AI-powered content generation (ship descriptions, port info, itinerary titles, etc.)  
+**Queue:** ShouldQueue (mandatory async)  
+**Dependency Injection:** AiService injected via `handle()` parameter
+
+#### Constructor
+
+```php
+public function __construct(
+    private readonly TextGenerationModel $model,
+    private readonly int|string|null $modelId = null,
+    private readonly string $lang = 'italiano'
+) {}
+```
+
+- **TextGenerationModel $model:** Enum specifying which AI model to use (e.g., GPT-4, Claude, Gemini)
+- **modelId (optional):** Entity ID to generate content for (e.g., Ship ID, Port ID)
+- **lang (optional):** Language code for generation (default: `'italiano'`)
+- **Readonly Properties:** All properties declared as `readonly` — immutable after construction
+
+#### Key Methods
+
+##### `handle(AiService $aiService): void`
+
+**Execution Flow:**
+```
+1. ini_set('max_execution_time', 0)     → Disable PHP timeout
+2. Try:
+   - Call $aiService->handleContentGeneration(
+       model: $this->model,
+       lang: $this->lang
+     )
+3. Catch Exception:
+   - Log error: "AI Generation Job failed: {message}"
+4. Silent return (no rethrow)
+```
+
+**Error Handling:** Generic exception catch with error logging — no retry or failed hook.
+
+#### Properties
+
+| Property | Type | Purpose |
+|----------|------|---------|
+| model | TextGenerationModel | AI model enum (GPT-4, Claude, etc.) |
+| modelId | int\|string\|null | Entity ID for generation context |
+| lang | string | Language for generated content |
+
+#### Dependencies
+
+| Dependency | Type | Purpose |
+|-----------|------|---------|
+| AiService | Service | Content generation orchestration |
+| TextGenerationModel | Enum | AI model selection |
+| Log | Facade | Error logging |
+
+#### Issues / Concerns
+
+1. **Silent Exception Handling:**
+   - Catches all exceptions but doesn't rethrow
+   - Job marks as successful even if generation failed
+   - No failed hook to notify admin or update entity status
+
+2. **No Job Configuration:**
+   - Missing `$tries`, `$timeout` properties
+   - Uses Laravel defaults (3 retries, 60-second timeout)
+   - 60 seconds may be insufficient for AI API calls
+
+3. **modelId Not Used:**
+   - Constructor accepts `modelId` but never passes to `handleContentGeneration()`
+   - Dead parameter — either remove or pass to service
+
+4. **Hard-coded Language Default:**
+   - `lang = 'italiano'` is hard-coded
+   - Should use application default or user preference
+
+5. **No Job Tracking:**
+   - No logging of job start/completion
+   - No status update on entity after generation
+   - No metadata about which model/language was used
+
+6. **Incomplete Implementation:**
+   - `handleContentGeneration()` method signature shows only `model` and `lang` params passed
+   - modelId and actual content generation logic hidden in AiService (not shown)
 
 ---
 

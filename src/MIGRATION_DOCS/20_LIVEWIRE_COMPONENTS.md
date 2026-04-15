@@ -792,6 +792,192 @@ const handleSave = async (index, data) => {
 
 ---
 
+## ⛴️ Ship Components
+
+### ShipCardComponent
+
+**Location:** `App\Livewire\Ships\ShipCardComponent`  
+**Purpose:** Display ship summary card (for listing/carousel)  
+**Skeleton:** None
+
+**Mounted Properties:**
+```php
+public $ship              // Ship model (passed to component)
+public $itinerariesCount  // Counted in mount
+public $shipCoverUrl      // Media URL with fallback
+```
+
+**Key Methods:**
+
+#### `mount()`
+- Calls `$ship->itinerariesCount()` method
+- Gets cover image via Spatie MediaLibrary
+- **Fallback URL:** Hardcoded placeholder from creativefabrica.com
+- **Double Call Issue:** Calls `getFirstMediaUrl('cover')` twice (once for check, once for assignment)
+
+**Features:**
+- Ship name (from model)
+- Itinerary count display
+- Cover image with fallback
+- Lightweight card display
+
+**Issues:**
+1. **Hardcoded Fallback URL:** External image URL (should be app asset)
+2. **Double Media Call:** Inefficient getFirstMediaUrl() called twice
+3. **No Error Handling:** Media URL fetch could fail
+4. **No Interactivity:** Display-only component
+
+**Optimization:**
+```php
+// Instead of:
+$url = $this->ship->getFirstMediaUrl('cover');
+$this->shipCoverUrl = !empty($url) ? $url : 'fallback';
+
+// Better:
+$this->shipCoverUrl = $this->ship->getFirstMediaUrl('cover') ?? 'fallback';
+```
+
+---
+
+### ShipShowComponent
+
+**Location:** `App\Livewire\Ships\ShipShowComponent`  
+**Purpose:** Detailed ship page with upcoming cruises
+
+**Mounted Properties:**
+```php
+public $ship              // Ship model
+public $shipCoverUrl      // Cover image URL
+public $itineraryGroups   // Upcoming cruises (7 results)
+public $nowMonth = 0      // Current month (unused)
+public $nowDate = null    // Current date (unused)
+```
+
+**Key Methods:**
+
+#### `mount()`
+- Gets cover image via Spatie MediaLibrary
+- Calls `getShipItineraryGroups()`
+- `nowMonth` and `nowDate` initialized but never used
+
+#### `getShipItineraryGroups()`
+- **Query:** CruiseView filtered by ship_id
+- **Filters Applied by CruiseView:**
+  - departure_date > today (future cruises only)
+  - sellability = 1 (available for booking)
+  - best_price IS NOT NULL (has pricing)
+- **Ordering:** By departure_date ASC
+- **Limit:** 100 records initially
+- **De-duplication:** `.unique('itineraryCode')` (removes same route, different dates)
+- **Final Limit:** `.take(7)` (top 7 unique itineraries)
+- **Re-index:** `.values()` (reset array keys)
+
+**Features:**
+- Ship details (photo, description from model)
+- Upcoming cruises (7 unique routes)
+- Sorted by departure date
+- Pre-filtered for available/sellable cruises
+- No pagination/filtering UI
+
+**Issues:**
+1. **Unused Variables:** `nowMonth` and `nowDate` never used
+2. **Hardcoded Limits:** 100 then 7 (magic numbers)
+3. **In-Memory De-duplication:** `.unique()` on 100 results in PHP (should be DB query)
+4. **No Pagination:** Fixed 7 results, no "Load More"
+5. **Empty Cover Fallback:** Falls back to empty string (no placeholder)
+6. **No Sorting Options:** User can't sort by price/rating
+7. **Unused Imports:** OfferService, Itinerary imports unused
+
+**Performance Note:**
+```php
+// Current: Inefficient
+CruiseView::where(...)->limit(100)->get()->unique('itineraryCode')->take(7)
+// Loads 100, deduplicates in-memory, takes 7
+
+// Better: Use database
+CruiseView::where(...)->groupBy('itineraryCode')->limit(7)->get()
+// Or join with distinct on itineraryCode
+```
+
+---
+
+## Ship Components Comparison
+
+| Feature | ShipCard | ShipShow |
+|---------|----------|----------|
+| Purpose | Card display | Detailed page |
+| Data Loaded | Count only | Count + cruises |
+| Itinerary Data | Count only | 7 upcoming cruises |
+| Image | Cover only | Cover only |
+| Interactivity | None | None |
+| Filtering | None | Pre-filtered (available/sellable) |
+| Pagination | N/A | Fixed 7 results |
+| Sorting | N/A | By departure_date |
+
+---
+
+## Migration Notes for Ship Components (Base44)
+
+### Current Architecture
+```php
+// Component loads ship data
+$ship = Ship::find($id);
+$this->itineraryGroups = CruiseView::where('ship_id', $id)->unique()->take(7)->get();
+```
+
+### Base44 Approach
+
+**1. Backend Function: getShipDetails**
+```typescript
+async function getShipDetails(req) {
+  const { shipId } = req.body;
+  const ship = await base44.entities.Ship.get(shipId);
+  const cruises = await base44.entities.CruiseView.filter({
+    ship_id: shipId,
+    availability: true,  // RLS or explicit filter
+  });
+  
+  return {
+    ship,
+    upcomingCruises: cruises.slice(0, 7)
+  };
+}
+```
+
+**2. React Component: ShipShowPage**
+```typescript
+export default function ShipShowPage({ shipId }) {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    base44.functions.invoke('getShipDetails', { shipId })
+      .then(setData);
+  }, [shipId]);
+  
+  return (
+    <div>
+      <ShipCard ship={data?.ship} />
+      <CruiseList cruises={data?.upcomingCruises} />
+    </div>
+  );
+}
+```
+
+### Benefits
+1. **Data Loading:** Decoupled from component lifecycle
+2. **Reusability:** Function can be called from multiple pages
+3. **Pagination:** Easy to add offset/limit parameters
+4. **Filtering:** Add price/rating/duration filters
+5. **Caching:** Cache results in backend (Redis)
+6. **Error Handling:** Try/catch per operation
+7. **Authorization:** Verify user can access ship
+
+### Hardcoded Values to Address
+- ShipCardComponent: Fallback image URL (use app asset)
+- ShipShowComponent: Limits 100 and 7 (parametrize or move to config)
+
+---
+
 ## 🔗 Component Dependencies
 
 ### Services Used

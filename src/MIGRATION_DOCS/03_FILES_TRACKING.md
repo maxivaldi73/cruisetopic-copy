@@ -227,6 +227,10 @@
 - [x] Materio/extended_ui/Treeview.php
 - [x] Materio/extended_ui/Misc.php
 
+### Dashboard Controllers (2 files)
+- [x] Materio/dashboard/Analytics.php
+- [x] Materio/dashboard/Crm.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -277,7 +281,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 199 files documented
+### Total: 201 files documented
 
 ---
 

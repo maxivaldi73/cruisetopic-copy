@@ -731,6 +731,220 @@ public function handle(): void
 
 ---
 
+## 🚢 MSC-Specific Jobs (2 jobs)
+
+### MSCSyncJob
+
+**Location:** `App\Jobs\Msc\MSCSyncJob`  
+**Traits:** ShouldQueue  
+**Retry:** 1 attempt  
+**Timeout:** 10800 seconds (3 hours)
+
+```php
+public function __construct($market = "ita")
+{
+    $this->loggingService = app(LoggingService::class);
+    $this->market = $market;
+}
+
+public function handle(): void
+{
+    ini_set('max_execution_time', 0);
+    $this->loggingService->logInfo('msc_sync', "Starting MSC sync for market: $this->market");
+    
+    $this->syncService = new MscSyncService();
+    $jobId = $this->job?->getJobId();
+    $jobId = ($jobId !== '') ? $jobId : null;
+    
+    $this->syncService->sync($this->market, $jobId);
+    
+    $this->loggingService->logInfo('msc_sync', "Completed MSC sync for market: $this->market");
+}
+```
+
+**Features:**
+- Market-scoped sync (ita, eng, etc.)
+- Custom logging service
+- Job ID tracking for audit
+- Execution time unlimited
+
+**Issues:**
+
+1. **Service Instantiation:** Creates new MscSyncService in handle()
+   - Better: Inject via dependency injection
+
+2. **ini_set Usage:** Direct execution time manipulation
+   - Better: Use job timeout property
+
+3. **Service in Constructor:** LoggingService instantiated in constructor
+   - Serialization risk
+
+4. **Ternary Check:** `($jobId !== '') ? $jobId : null`
+   - Could use null coalescing: `$jobId ?: null`
+
+5. **No Error Handling:** Exception propagates
+   - Better: Try/catch with logging
+
+---
+
+### ImportItineraryMapsJob
+
+**Location:** `App\Jobs\Msc\ImportItineraryMapsJob`  
+**Traits:** ShouldQueue  
+**Retry:** 3 attempts with backoff [60, 300]  
+**Timeout:** 300 seconds (5 minutes)  
+**Queue:** msc_sync
+
+```php
+public function __construct(string $path, bool $dryRun = false)
+{
+    $this->path = $path;
+    $this->dryRun = $dryRun;
+    $this->onQueue('msc_sync');
+}
+
+public function handle(): void
+{
+    // 1. Validate file exists
+    if (!is_file($this->path)) {
+        Log::warning("[ImportItineraryMapsJob] File non trovato: {$this->path}");
+        return;
+    }
+
+    // 2. Parse XML with streaming reader
+    $reader = new \XMLReader();
+    if (!$reader->open($this->path, null, LIBXML_NONET | LIBXML_COMPACT)) {
+        Log::error("[ImportItineraryMapsJob] Impossibile aprire XML: {$this->path}");
+        return;
+    }
+
+    $ns = 'http://tempuri.org/';
+    $found = 0;
+    $pairs = [];  // itineraryCode => url mapping
+
+    // 3. Stream-read XML <List> elements
+    try {
+        while ($reader->read()) {
+            if ($reader->nodeType === \XMLReader::ELEMENT
+                && $reader->localName === 'List'
+                && ($reader->namespaceURI === $ns || $reader->namespaceURI === '')
+            ) {
+                $outer = $reader->readOuterXML();
+                if (!$outer) continue;
+                
+                $listNode = new \SimpleXMLElement($outer);
+                $listNode->registerXPathNamespace('t', $ns);
+
+                $itineraryCode = (string) ($listNode['ItineraryCode'] ?? '');
+                $mapBigSize = (string) ($listNode['MapBigSize'] ?? '');
+
+                if ($itineraryCode !== '' && $mapBigSize !== '') {
+                    $pairs[$itineraryCode] = $mapBigSize;
+                    $found++;
+                }
+
+                $reader->next();
+            }
+        }
+    } finally {
+        $reader->close();
+    }
+
+    // 4. Dry-run mode
+    if ($this->dryRun) {
+        Log::info("[ImportItineraryMapsJob] DRY RUN: trovati {$found} itinerari con MapBigSize.");
+        return;
+    }
+
+    if ($found === 0) {
+        Log::warning("[ImportItineraryMapsJob] Nessun <List> valido trovato nel file.");
+        return;
+    }
+
+    // 5. Update database in chunks
+    $codes = array_keys($pairs);
+    $now = now();
+
+    foreach (array_chunk($codes, 500) as $chunk) {
+        // Only update existing records
+        $existing = DB::table('itineraries')
+            ->whereIn('itineraryCode', $chunk)
+            ->pluck('itineraryCode')
+            ->all();
+
+        if (empty($existing)) continue;
+
+        foreach ($existing as $code) {
+            DB::table('itineraries')
+                ->where('itineraryCode', $code)
+                ->update([
+                    'url_image_map' => $pairs[$code],
+                    'updated_at' => $now,
+                ]);
+        }
+    }
+
+    Log::info("[ImportItineraryMapsJob] Aggiornati fino a {$found} itinerari (solo esistenti).");
+
+    // 6. Dispatch media generation job
+    if ($found > 0) {
+        $cruiseLineId = 47;  // MSC hard-coded ID
+        GenerateItineraryMediaJob::dispatch($cruiseLineId, null, 'media_conversion')
+            ->onQueue('media_conversion');
+        
+        Log::info("[ImportItineraryMapsJob] Dispatchato GenerateItineraryMediaJob per CruiseLine {$cruiseLineId}");
+    }
+}
+```
+
+**Features:**
+
+1. **XML Streaming:** Uses XMLReader (memory-efficient)
+   - Doesn't load entire file into memory
+   - Processes <List> elements one at a time
+   - Good practice for large XML files
+
+2. **Dry-Run Mode:** Optional test execution
+   - Logs findings without persisting
+   - Useful for validation
+
+3. **Chunk Updates:** Batch database operations
+   - 500 records per chunk
+   - Prevents memory exhaustion
+
+4. **Job Chaining:** Dispatches media generation after update
+   - Generates maps in separate job
+   - Decoupled processing
+
+5. **Namespace Handling:** Supports XML namespaces
+   - Validates namespace URI
+   - Fallback for empty namespace
+
+6. **Retry with Backoff:** 3 attempts with backoff [60, 300] seconds
+   - Waits 1 min, then 5 min before retry
+   - Handles transient failures
+
+**Issues:**
+
+1. **Hard-coded Cruiseline ID:** `$cruiseLineId = 47`
+   - Should be configurable or derived from file
+   - Brittle if ID changes
+
+2. **Hard-coded Namespace:** `http://tempuri.org/`
+   - Could be parameterized
+
+3. **Commented Code:** Line 135 has commented log statement
+   - Cleanup needed
+
+4. **Duplicate Update Logic:** Lines 115-130
+   - Builds array then iterates separately
+   - Could combine into single loop
+
+5. **No Validation:** Doesn't check if URL is valid
+   - Could add URL format validation
+
+---
+
 ## ⚠️ Common Issues Across All Jobs
 
 ### Shared Problems

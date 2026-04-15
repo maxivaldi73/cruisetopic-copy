@@ -99,7 +99,11 @@
 - [x] ExploraSyncJob.php
 - [x] AiGenerationJob.php
 
-### Total: 70 files documented
+### HTTP Responses (2 files)
+- [x] GenericResponse.php
+- [x] LoginResponse.php
+
+### Total: 72 files documented
 
 ---
 

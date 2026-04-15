@@ -103,7 +103,33 @@
 - [x] GenericResponse.php
 - [x] LoginResponse.php
 
-### Total: 72 files documented
+### Form Requests (24 files)
+- [x] AIGenerationRequest.php
+- [x] AddNewPortFromMappingRequest.php
+- [x] AmenityRequest.php
+- [x] BestDestinationStoreRequest.php
+- [x] CabinRequest.php
+- [x] CancellationConditionRequest.php
+- [x] ChangeLeadStatusRequest.php
+- [x] CruiselineRequest.php
+- [x] DestinationRequest.php
+- [x] FibosSettingRequest.php
+- [x] FirstStepCheckoutRequest.php
+- [x] InstallmentSettingRequest.php
+- [x] ItineraryRequest.php
+- [x] LanguageRequest.php
+- [x] MarketRequest.php
+- [x] PageRequest.php
+- [x] PermissionRequest.php
+- [x] PortRequest.php
+- [x] RegistrationRequest.php
+- [x] SavePortMappingImportRequest.php
+- [x] ShipRequest.php
+- [x] SupplierCancellationConditionRequest.php
+- [x] SupplierRequest.php
+- [x] WebsiteRequest.php
+
+### Total: 96 files documented
 
 ---
 
@@ -141,7 +167,7 @@
 - [x] Services/Fibos/Requests/HeaderRequest.php
 - [x] Services/Fibos/Requests/RequestItinerary.php
 - [x] Services/Fibos/Requests/RequestSearchBySeaPricing.php
-- [ ] Form Requests (validation)
+- [x] Form Requests (24 files - see 28_FORM_REQUESTS.md)
 
 ### Exceptions (Priority: MEDIUM)
 - [x] Services/Fibos/Exceptions/ConfigurationException.php
@@ -193,7 +219,8 @@
 | Services Documented | 21 | ✅ Done |
 | Providers Documented | 16 | ✅ Done |
 | Policies Documented | 3 | ✅ Done |
-| Requests Documented | 3 | ✅ Done |
+| Fibos Requests Documented | 3 | ✅ Done |
+| Form Requests Documented | 24 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
 | Temp Models Documented | 1 | ✅ Done |

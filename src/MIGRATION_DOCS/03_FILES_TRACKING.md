@@ -72,7 +72,12 @@
 ### Temp Models (1 file)
 - [x] TempElementEntity.php
 
-### Total: 18 files documented
+### Observers (3 files)
+- [x] CruisePriceObserver.php
+- [x] PortObserver.php
+- [x] QuoteDetailObserver.php
+
+### Total: 52 files documented
 
 ---
 
@@ -164,12 +169,13 @@
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
 | Temp Models Documented | 1 | ✅ Done |
+| Observers Documented | 3 | ✅ Done |
 | Models (estimated) | 18 | ⏳ Pending |
 | Controllers (estimated) | 5+ | ⏳ Pending |
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~9.1% mapped** |
+| **Total Known/Est** | **787+** | **~9.7% mapped** |
 
 ---
 

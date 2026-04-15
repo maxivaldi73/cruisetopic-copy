@@ -49,6 +49,9 @@
 - [x] PortServiceProvider.php
 - [x] RouteServiceProvider.php
 
+### Policies (1 file)
+- [x] TeamPolicy.php
+
 ### Config (1 file)
 - [x] config/fibos.php
 
@@ -154,6 +157,7 @@
 |----------|-------|--------|
 | Services Documented | 21 | ✅ Done |
 | Providers Documented | 16 | ✅ Done |
+| Policies Documented | 1 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
@@ -163,7 +167,7 @@
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~8.5% mapped** |
+| **Total Known/Est** | **787+** | **~8.7% mapped** |
 
 ---
 

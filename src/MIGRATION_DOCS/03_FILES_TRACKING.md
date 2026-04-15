@@ -95,7 +95,10 @@
 - [x] Role.php
 - [x] Permission.php
 
-### Total: 68 files documented
+### Jobs (1 file)
+- [x] ExploraSyncJob.php
+
+### Total: 69 files documented
 
 ---
 
@@ -153,7 +156,9 @@
 - [ ] Services/Import/* (other importers)
 - [ ] Services/Search/* (if exists)
 - [ ] Middleware
-- [ ] Jobs/Queue classes
+
+### Jobs / Queue Classes (Priority: MEDIUM)
+- [x] ExploraSyncJob.php
 
 ### Database (Priority: MEDIUM)
 - [ ] Migrations (all)

@@ -82,6 +82,10 @@
 - [ ] Interfaces/ICruiseRealTime.php (inferred)
 - [ ] Cruiseline-specific RealTime services (Msc, Royal, Ncl, etc.)
 
+### DataTable & Filter Services (Priority: HIGH)
+- [x] DataTableService.php
+- [x] FilterService.php
+
 ### Other Services (Priority: MEDIUM)
 - [ ] Services/Fibos/SyncService.php (parent class)
 - [ ] Services/Import/* (other importers)
@@ -114,7 +118,7 @@
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Services Documented | 9 | ✅ Done |
+| Services Documented | 11 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
@@ -124,7 +128,7 @@
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~3.5% mapped** |
+| **Total Known/Est** | **787+** | **~3.8% mapped** |
 
 ---
 

@@ -68,6 +68,28 @@ TempElementEntity (Temp storage model)
 
 ---
 
+## 📊 DataTable Services Graph
+
+```
+DataTableService (Yajra Configuration)
+    ├── configureHtml() - HTML builder setup
+    ├── Multi-page selections (persistent Set storage)
+    ├── Bulk actions (delete, update, custom)
+    ├── Export actions (Excel, CSV, PDF, Print, Copy)
+    ├── Search/filters (column + global)
+    └── Event handlers (draw, select, deselect)
+
+FilterService (Query Builder)
+    ├── applyFilters() - Main entry point
+    ├── processCriteria() - Recursive filter processing
+    ├── processSingleCriterion() - Individual criterion
+    ├── buildFilterCondition() - Condition builder
+    ├── filterByDate() - Multi-format date parsing
+    └── debugSearchBuilder() - Debug utility
+```
+
+---
+
 ## 📦 Models Referenced
 
 | Model | Used By | Purpose |

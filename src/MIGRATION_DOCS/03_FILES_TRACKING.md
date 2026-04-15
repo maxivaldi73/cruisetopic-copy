@@ -174,6 +174,9 @@
 ### Materio Laravel Example Controllers (1 file)
 - [x] Materio/laravel_example/UserManagement.php
 
+### Language Controller (1 file)
+- [x] Materio/language/LanguageController.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -224,7 +227,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 162 files documented
+### Total: 163 files documented
 
 ---
 

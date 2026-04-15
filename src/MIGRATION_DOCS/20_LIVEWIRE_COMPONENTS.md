@@ -1258,6 +1258,212 @@ const loadPorts = async (tabId) => {
 
 ---
 
+## 🎁 Offer Components
+
+### OfferCard
+
+**Location:** `App\Livewire\Offers\OfferCard`  
+**Purpose:** Display offer/deal summary card
+
+**State Variables:**
+```php
+public $deal             // Deal model (passed to component)
+public $backgroundUrl    // Cover image URL
+```
+
+**Key Methods:**
+
+#### `mount()`
+- Get cover image via Spatie MediaLibrary
+- Fallback to empty string (no placeholder)
+- **Issue:** Double call to getFirstMediaUrl() (check + assignment)
+
+**Features:**
+- Deal/offer card display
+- Background image
+
+**Issues:**
+1. **Double Media Call:** getFirstMediaUrl() called twice in condition
+2. **No Fallback Image:** Defaults to empty string (should have placeholder)
+3. **Minimal Logic:** Display-only component
+4. **Commented Code:** Has debug statements (dd, commented fallback)
+
+---
+
+### OfferShowComponent
+
+**Location:** `App\Livewire\Offers\OfferShowComponent`  
+**Purpose:** Detailed offer/deal page with paginated destination list
+
+**State Variables:**
+```php
+public $offerGroup               // OfferGroup model (passed to component)
+public $backgroundUrl            // Cover image URL
+public $offerDestinations = []   // Paginated destinations (accumulated)
+public $perPage = 12             // Destinations per page
+public $page = 1                 // Current page (1-indexed)
+public $totalPages               // Calculated total pages
+public $totalDestinations        // Total destination count
+public $showMoreButton = true    // Show "Load More" button state
+```
+
+**Key Methods:**
+
+#### `mount()`
+- Get cover image (no fallback)
+- Count all destinations (`Destination::count()`)
+- Calculate total pages: `ceil(totalDestinations / perPage)`
+- Load first page via `loadMoreOfferDestinations()`
+- Set showMoreButton to false if page >= totalPages
+- **Issue:** Calculates pages before loading first page (0-based vs 1-based confusion)
+
+#### `loadMoreOfferDestinations()`
+- **Guard Check:** Only load if `page <= totalPages`
+- **Fetch:** Use `Destination::paginate($perPage, ['*'], 'page', $page)`
+  - Uses offset-based pagination parameter (3rd param = 'page')
+  - Gets items (not Paginator object)
+- **Accumulate:** Merge with existing destinations via array_merge()
+- **Update State:**
+  - Increment page counter
+  - Update showMoreButton based on current page vs totalPages
+
+**Features:**
+- Offer details (cover image)
+- Paginated destination list
+- "Load More" button toggle
+- Simple pagination (page + perPage)
+
+**Issues:**
+1. **Double Count:** Counts all destinations twice
+   - Once in mount() for totalPages calculation
+   - Again implicitly in paginate() method
+2. **Inefficient Pagination:** Uses ::paginate() which queries total count per call
+3. **Page Parameter Confusion:** Uses 'page' as 3rd param to paginate() (unusual)
+   - Standard Laravel: paginate($perPage, ['*'], 'page', $page) where last param is page number
+   - This query includes pagination metadata (not needed, only items used)
+4. **No Filtering:** Loads all destinations regardless of offer context
+   - Should be scoped to offerGroup destinations
+5. **Commented Code:** Has old implementation (take() instead of paginate())
+6. **No Fallback Image:** backgroundUrl has no default (like OfferCard)
+
+---
+
+## Offer Components Comparison
+
+| Feature | OfferCard | OfferShowComponent |
+|---------|-----------|-------------------|
+| Purpose | Card display | Detail page + pagination |
+| Data Loaded | Image only | Image + destinations |
+| Pagination | N/A | Yes (12 per page) |
+| Filtering | None | None (all destinations) |
+| Interactivity | Display | Load More button |
+
+---
+
+## Offer Components Common Issues
+
+### Shared Problems
+1. **Double Media Calls:** Both call getFirstMediaUrl() twice (check + assignment)
+2. **No Image Fallbacks:** Both have empty/missing fallback images
+3. **Incomplete Implementation:** OfferShowComponent doesn't filter to offer-specific destinations
+4. **Commented Code:** Legacy implementations left in (debug code)
+
+### Performance Issues
+- OfferShowComponent: ::paginate() re-counts total on each "Load More" (inefficient)
+- No scoping to offer context (loading all destinations)
+
+---
+
+## Migration Notes for Offer Components (Base44)
+
+### OfferCard Refactor
+```typescript
+// Current: Double call, empty fallback
+$backgroundUrl = !empty($deal->getFirstMediaUrl('cover')) 
+  ? $deal->getFirstMediaUrl('cover') 
+  : '';
+
+// Better: Null coalescing + fallback
+$backgroundUrl = $deal->getFirstMediaUrl('cover') ?? config('app.fallback_images.offer');
+```
+
+### OfferShowComponent Issues
+
+**Problem 1: Double Pagination Query**
+```php
+// Current: Counts twice
+$this->totalDestinations = Destination::count();  // First count
+$paginatedDestinations = Destination::paginate($this->perPage);  // Implicit count again
+```
+
+**Solution:**
+```php
+// Better: Use LengthAwarePaginator to avoid double query
+$pagination = Destination::paginate($this->perPage);
+$this->totalDestinations = $pagination->total();
+$this->totalPages = $pagination->lastPage();
+```
+
+**Problem 2: No Offer Scoping**
+```php
+// Current: All destinations
+Destination::paginate($this->perPage);
+
+// Better: Filter to offer group
+Destination::whereHas('offerGroups', function($q) {
+  $q->where('offer_groups.id', $this->offerGroup->id);
+})->paginate($this->perPage);
+```
+
+### Base44 Refactor
+
+**Backend Function: getOfferDestinations**
+```typescript
+async function getOfferDestinations(req) {
+  const { offerGroupId, page, perPage } = req.body;
+  
+  const destinations = await base44.entities.Destination.filter({
+    offer_group_id: offerGroupId
+  });
+  
+  const start = (page - 1) * perPage;
+  const paginated = destinations.slice(start, start + perPage);
+  
+  return {
+    destinations: paginated,
+    hasMore: destinations.length > page * perPage,
+    total: destinations.length
+  };
+}
+```
+
+**React Component:**
+```typescript
+const [destinations, setDestinations] = useState([]);
+const [page, setPage] = useState(1);
+const [hasMore, setHasMore] = useState(true);
+
+const loadMore = async () => {
+  const data = await base44.functions.invoke('getOfferDestinations', {
+    offerGroupId: offerGroup.id,
+    page: page + 1,
+    perPage: 12
+  });
+  setDestinations(prev => [...prev, ...data.destinations]);
+  setHasMore(data.hasMore);
+  setPage(prev => prev + 1);
+};
+```
+
+### Benefits
+1. **No Double Counts:** Fetch total once
+2. **Offer Scoping:** Only destinations in offer group
+3. **Clean Pagination:** Frontend manages state, backend handles data
+4. **Shared Fallbacks:** Centralized image URLs via config
+5. **Removed Code Duplication:** No commented legacy code
+
+---
+
 ## 🔗 Component Dependencies
 
 ### Services Used

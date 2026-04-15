@@ -473,6 +473,8 @@
 - [x] DataTables/TicketCategory/TicketCategoriesDataTable.php
 - [x] DataTables/Ticket/TicketsDataTable.php
 - [x] DataTables/Seller/SellersDataTable.php
+- [x] DataTables/Provider/ProviderMappingPortDataTable.php
+- [x] DataTables/Provider/SyncJobDataTable.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -543,7 +545,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 414 files documented
+### Total: 416 files documented
 
 ---
 

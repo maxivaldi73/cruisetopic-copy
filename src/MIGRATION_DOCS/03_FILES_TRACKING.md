@@ -442,6 +442,29 @@
 - [x] Enums/TicketChannel.php
 - [x] Enums/TicketSubject.php
 
+### DataTable Classes (21 files)
+- [x] DataTables/UnmappedPortMappingDataTable.php
+- [x] DataTables/TravelPackageDataTable.php
+- [x] DataTables/SuppliersDataTable.php
+- [x] DataTables/SupplierCancellationConditionsDataTable.php
+- [x] DataTables/SlidesDataTable.php
+- [x] DataTables/ReviewsDataTable.php
+- [x] DataTables/PortMappingDataTable.php
+- [x] DataTables/OffersGroupDataTable.php
+- [x] DataTables/MscPortMappingDataTable.php
+- [x] DataTables/ListingBannersDataTable.php
+- [x] DataTables/JobsDataTable.php
+- [x] DataTables/InstallmentsDataTable.php
+- [x] DataTables/InstallmentSettingsDataTable.php
+- [x] DataTables/FibosSettingsDataTable.php
+- [x] DataTables/FibosFailedJobsDataTable.php
+- [x] DataTables/FareFamilyDataTable.php
+- [x] DataTables/FailedJobsDataTable.php
+- [x] DataTables/ExploraPortMappingDataTable.php
+- [x] DataTables/CruiselineBulletsDataTable.php
+- [x] DataTables/CostaPortMappingDataTable.php
+- [x] DataTables/CancellationConditionsDataTable.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -511,7 +534,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 384 files documented
+### Total: 405 files documented
 
 ---
 

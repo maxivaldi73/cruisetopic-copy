@@ -188,6 +188,10 @@
 - [x] Materio/front_pages/Payment.php
 - [x] Materio/front_pages/Pricing.php
 
+### Form Wizard Controllers (2 files)
+- [x] Materio/form_wizard/Icons.php
+- [x] Materio/form_wizard/Numbered.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -238,7 +242,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 170 files documented
+### Total: 172 files documented
 
 ---
 

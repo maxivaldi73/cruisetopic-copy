@@ -105,6 +105,9 @@
 ### Webhook Controllers (1 file)
 - [x] RevolutWebhookController.php
 
+### Payment Controllers (1 file)
+- [x] RevolutController.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php

@@ -482,6 +482,7 @@
 - [x] DataTables/Provider/Cruiseline/FibosCruiselineDataTable.php
 - [x] DataTables/Provider/Costa/CostaSettingsDataTable.php
 - [x] DataTables/Product/ProductsDataTable.php
+- [x] DataTables/Pricelist/PricelistDataTable.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -552,7 +553,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 423 files documented
+### Total: 424 files documented
 
 ---
 

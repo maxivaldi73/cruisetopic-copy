@@ -171,6 +171,9 @@
 - [x] Materio/layouts/WithoutMenu.php
 - [x] Materio/layouts/WithoutNavbar.php
 
+### Materio Laravel Example Controllers (1 file)
+- [x] Materio/laravel_example/UserManagement.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -221,7 +224,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 161 files documented
+### Total: 162 files documented
 
 ---
 

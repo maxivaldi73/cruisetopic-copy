@@ -180,6 +180,14 @@
 ### Icons Controllers (1 file)
 - [x] Materio/icons/RiIcons.php
 
+### Front Pages Controllers (6 files)
+- [x] Materio/front_pages/Checkout.php
+- [x] Materio/front_pages/HelpCenter.php
+- [x] Materio/front_pages/HelpCenterArticle.php
+- [x] Materio/front_pages/Landing.php
+- [x] Materio/front_pages/Payment.php
+- [x] Materio/front_pages/Pricing.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -230,7 +238,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 164 files documented
+### Total: 170 files documented
 
 ---
 

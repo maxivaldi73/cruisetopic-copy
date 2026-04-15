@@ -99,6 +99,9 @@
 - [x] ExploraSyncJob.php
 - [x] AiGenerationJob.php
 
+### Webhook Controllers (1 file)
+- [x] RevolutWebhookController.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -149,7 +152,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 112 files documented
+### Total: 113 files documented
 
 ---
 

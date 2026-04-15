@@ -483,6 +483,7 @@
 - [x] DataTables/Provider/Costa/CostaSettingsDataTable.php
 - [x] DataTables/Product/ProductsDataTable.php
 - [x] DataTables/Pricelist/PricelistDataTable.php
+- [x] DataTables/Market/MarketsDataTable.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -553,7 +554,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 424 files documented
+### Total: 425 files documented
 
 ---
 

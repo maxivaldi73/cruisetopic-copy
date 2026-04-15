@@ -442,7 +442,7 @@
 - [x] Enums/TicketChannel.php
 - [x] Enums/TicketSubject.php
 
-### DataTable Classes (23 files)
+### DataTable Classes (26 files)
 - [x] DataTables/UnmappedPortMappingDataTable.php
 - [x] DataTables/TravelPackageDataTable.php
 - [x] DataTables/SuppliersDataTable.php
@@ -467,6 +467,9 @@
 - [x] DataTables/Quote/QuoteDataTable.php
 - [x] DataTables/Quote/QuoteStatusesDataTable.php
 - [x] DataTables/Website/WebsitesDataTable.php
+- [x] DataTables/User/PermissionDataTable.php
+- [x] DataTables/User/RolesDataTable.php
+- [x] DataTables/User/UsersDataTable.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -537,7 +540,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 408 files documented
+### Total: 411 files documented
 
 ---
 

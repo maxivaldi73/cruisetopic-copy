@@ -192,6 +192,9 @@
 - [x] Materio/form_wizard/Icons.php
 - [x] Materio/form_wizard/Numbered.php
 
+### Form Validation Controller (1 file)
+- [x] Materio/form_validation/Validation.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -242,7 +245,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 172 files documented
+### Total: 173 files documented
 
 ---
 

@@ -200,6 +200,18 @@
 - [x] Materio/form_layouts/StickyActions.php
 - [x] Materio/form_layouts/VerticalForm.php
 
+### Form Elements Controllers (10 files)
+- [x] Materio/form_elements/BasicInput.php
+- [x] Materio/form_elements/Editors.php
+- [x] Materio/form_elements/CustomOptions.php
+- [x] Materio/form_elements/FileUpload.php
+- [x] Materio/form_elements/Extras.php
+- [x] Materio/form_elements/Picker.php
+- [x] Materio/form_elements/InputGroups.php
+- [x] Materio/form_elements/Selects.php
+- [x] Materio/form_elements/Sliders.php
+- [x] Materio/form_elements/Switches.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -250,7 +262,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 176 files documented
+### Total: 186 files documented
 
 ---
 

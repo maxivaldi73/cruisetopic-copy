@@ -361,7 +361,76 @@
 - [x] Api/ApiAuthController.php
 - [x] Api/ItinerariesController.php
 
-### Total: 267 files documented
+### Admin Controllers (68 files)
+- [x] Admin/Controller.php (base)
+- [x] Admin/HomeController.php
+- [x] Admin/LanguageController.php
+- [x] Admin/PermissionController.php
+- [x] Admin/PaymentMethodsController.php
+- [x] Admin/LeadController.php
+- [x] Admin/LeadActivityController.php
+- [x] Admin/LeadLogController.php
+- [x] Admin/LeadRuleController.php
+- [x] Admin/SellerController.php
+- [x] Admin/CustomerController.php
+- [x] Admin/MarketController.php
+- [x] Admin/CommentController.php
+- [x] Admin/QuoteController.php
+- [x] Admin/QuoteDetailController.php
+- [x] Admin/OrdersController.php
+- [x] Admin/InstallmentController.php
+- [x] Admin/InstallmentSettingController.php
+- [x] Admin/InformationNoteController.php
+- [x] Admin/OfferGroupsController.php
+- [x] Admin/OfferGroupRuleController.php
+- [x] Admin/CruiselineController.php
+- [x] Admin/ShipController.php
+- [x] Admin/CabinController.php
+- [x] Admin/CabinMappingController.php
+- [x] Admin/CabinOptionController.php
+- [x] Admin/DeckController.php
+- [x] Admin/ExperienceController.php
+- [x] Admin/ShipAmenitiesController.php
+- [x] Admin/FareFamilyController.php
+- [x] Admin/CurrenciesController.php
+- [x] Admin/BestDestinationController.php
+- [x] Admin/ListingBannerController.php
+- [x] Admin/DealFiltersController.php
+- [x] Admin/SupplierController.php
+- [x] Admin/SupplierCancellationConditionController.php
+- [x] Admin/CancellationConditionController.php
+- [x] Admin/PricelistController.php
+- [x] Admin/PriceController.php
+- [x] Admin/TravelPackagesController.php
+- [x] Admin/PageController.php
+- [x] Admin/SlidersController.php
+- [x] Admin/BannersController.php
+- [x] Admin/DealController.php
+- [x] Admin/DealTypeController.php
+- [x] Admin/ContentByMarketController.php
+- [x] Admin/WebsiteController.php
+- [x] Admin/MediaController.php
+- [x] Admin/TicketController.php
+- [x] Admin/TicketCategoryController.php
+- [x] Admin/NotificationController.php
+- [x] Admin/FibosController.php
+- [x] Admin/FibosContentController.php
+- [x] Admin/MscController.php
+- [x] Admin/CostaController.php
+- [x] Admin/ExploraController.php
+- [x] Admin/ProviderController.php
+- [x] Admin/JobsController.php
+- [x] Admin/TaskController.php
+- [x] Admin/ImportController.php
+- [x] Admin/ExportController.php
+- [x] Admin/ExcelImportController.php
+- [x] Admin/DocumentController.php
+- [x] Admin/LogController.php
+- [x] Admin/MassMessageController.php
+- [x] Admin/ReviewController.php
+- [x] Admin/BaseCrudController.php
+
+### Total: 335 files documented
 
 ---
 

@@ -361,6 +361,11 @@
 - [x] Api/ApiAuthController.php
 - [x] Api/ItinerariesController.php
 
+### User & Access Control Controllers (3 files)
+- [x] Admin/User/PermissionController.php
+- [x] Admin/User/RoleController.php
+- [x] Admin/User/UserController.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -430,7 +435,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 335 files documented
+### Total: 338 files documented
 
 ---
 

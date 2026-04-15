@@ -60,8 +60,8 @@
 - [ ] Form Requests (validation)
 
 ### Exceptions (Priority: MEDIUM)
-- [ ] Services/Fibos/Exceptions/ConfigurationException.php
-- [ ] Services/Fibos/Exceptions/FibosApiException.php
+- [x] Services/Fibos/Exceptions/ConfigurationException.php
+- [x] Services/Fibos/Exceptions/FibosApiException.php
 
 ### Other Services (Priority: MEDIUM)
 - [ ] Services/Fibos/SyncService.php (parent class)
@@ -97,12 +97,13 @@
 |----------|-------|--------|
 | Services Documented | 7 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
+| Exceptions Documented | 2 | ✅ Done |
 | Models (estimated) | 18 | ⏳ Pending |
 | Controllers (estimated) | 5+ | ⏳ Pending |
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~2% mapped** |
+| **Total Known/Est** | **787+** | **~2.5% mapped** |
 
 ---
 

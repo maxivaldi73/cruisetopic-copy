@@ -195,6 +195,11 @@
 ### Form Validation Controller (1 file)
 - [x] Materio/form_validation/Validation.php
 
+### Form Layouts Controllers (3 files)
+- [x] Materio/form_layouts/HorizontalForm.php
+- [x] Materio/form_layouts/StickyActions.php
+- [x] Materio/form_layouts/VerticalForm.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -245,7 +250,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 173 files documented
+### Total: 176 files documented
 
 ---
 

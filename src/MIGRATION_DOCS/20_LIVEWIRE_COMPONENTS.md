@@ -587,6 +587,211 @@ getPorts()            // Extract unique departure ports from results
 
 ---
 
+## 📊 Admin Table Components
+
+### OfferGroupsTableInline
+
+**Location:** `App\Livewire\Tables\OfferGroupsTableInline`  
+**Purpose:** Inline CRUD for offer groups per market  
+**Market-Scoped:** Yes (filters by marketId)  
+**Traits:** WithFileUploads
+
+**State Variables:**
+```php
+$marketId               // Filter scope
+$editedOfferGroupIndex  // Row edit tracking
+$editedOfferGroupField  // Field-level edit tracking
+$offerGroups = []       // Table data (array)
+$coverInputs = []       // File upload inputs
+```
+
+**Validation:**
+```php
+'offerGroups.*.name' => ['required']
+```
+
+**Key Methods:**
+
+#### `mount($marketId)`
+- Load offer groups for specific market
+- Convert to array for component state
+- Guard: returns empty array if no records
+
+#### `editOfferGroup($index)` / `editOfferGroupField($index, $fieldName)`
+- Set edit mode on row/field
+- Field tracking: `"{index}.{fieldName}"` (dot-notation)
+
+#### `addNew()`
+- Creates empty OfferGroup instance
+- Converts to array
+- Pushes to component state
+
+#### `saveOfferGroup($offerGroupIndex)`
+- Validates all rules
+- **Update Path:** If ID exists → find & update
+- **Create Path:** If no ID → fill, set market_id & enabled=false, save
+- Updates local array with new ID/enabled after create
+- Clears edit tracking
+
+#### `deleteOfferGroup($index)`
+- Finds by ID from array
+- Deletes from DB
+- Removes from local array
+- Redirects back (Livewire component in page)
+
+#### `cancel()`
+- Removes last item from array (intended for new row cancellation)
+- **Bug Risk:** Doesn't check if last item is the one being edited
+
+**Features:**
+- Market-specific filtering
+- File uploads support (WithFileUploads trait)
+- Inline create/edit/delete
+- Conditional insert vs update
+
+**Issues:**
+1. **Inefficient Query:** `count() > 0` then get again
+2. **Empty Constructor:** No initialization logic
+3. **Array Re-indexing Missing:** `unset()` leaves gaps, not re-indexed
+4. **Cancel Logic:** `array_pop()` blindly removes last, risky
+5. **Redirect Pattern:** Uses redirect() in Livewire component (should emit event)
+
+---
+
+### PaymentMethodsTable
+
+**Location:** `App\Livewire\Tables\PaymentMethodsTable`  
+**Purpose:** Inline CRUD for payment methods (global, no market scope)
+
+**State Variables:**
+```php
+$editedPaymentMethodIndex  // Row edit tracking
+$editedPaymentMethodField  // Field-level edit tracking
+$paymentMethods = []       // Table data (array)
+```
+
+**Validation:**
+```php
+'paymentMethods.*.name' => ['required'],
+'paymentMethods.*.type' => ['required'],
+```
+
+**Key Methods:**
+
+#### `mount()`
+- Load all PaymentMethod records
+- Convert to array
+
+#### `editPaymentMethod($index)` / `editPaymentMethodField($index, $fieldName)`
+- Set edit mode (identical to OfferGroupsTableInline)
+
+#### `addNew()`
+- Creates empty PaymentMethod instance
+- Pushes to component state
+
+#### `savePaymentMethod($paymentMethodIndex)`
+- Validates all rules
+- **Update Path:** If ID exists → find & update
+- **Create Path:** If no ID:
+  1. Fill model with data
+  2. Save to DB
+  3. **Inefficient:** Pop all items, update with new ID, push back
+  4. Local array updated
+- Clears edit tracking
+
+#### `deletePaymentMethod($index)`
+- Finds by ID
+- Deletes from DB
+- Removes from local array
+- Redirects back
+
+#### `cancel()`
+- Removes last item (same pattern as OfferGroupsTableInline)
+
+**Features:**
+- Global payment methods (no scoping)
+- Required validation on name & type
+- Inline CRUD operations
+- Conditional insert vs update
+
+**Issues:**
+1. **Inefficient Save:** `array_pop()` all items, then `array_push()` back
+2. **No Re-indexing:** `unset()` leaves gaps after delete
+3. **Redirect Pattern:** Uses redirect() in Livewire (risky)
+4. **Empty Constructor:** No logic
+
+**Differences from OfferGroupsTableInline:**
+- No market scoping
+- Requires `type` field (2 validations vs 1)
+- No file upload support (no WithFileUploads)
+- Inefficient item reassembly on create
+
+---
+
+## 📝 Table Components Common Issues
+
+### Shared Problems
+1. **Array Index Management:** Using `unset()` without re-indexing leaves gaps
+2. **Redirect in Components:** Both use `redirect()->back()` (not Livewire pattern)
+3. **Empty Constructors:** No initialization
+4. **Query Inefficiency:** OfferGroupsTableInline counts then gets
+5. **Cancel Logic:** `array_pop()` is unreliable (removes last, not current edit)
+
+### Security Concerns
+- No authorization checks (who can edit/delete)
+- No audit trail
+- Direct model fill() without mass assignment guards
+- Redirect success messages empty
+
+### Performance Issues
+- Full table reload on every action
+- Array operations instead of efficient DB queries
+- No pagination for large datasets
+- File upload state but no upload implementation visible
+
+---
+
+## Migration Notes for Base44 (All Table Components)
+
+### Current Pattern
+```php
+// Livewire: Load → Array → Edit → Save
+$items = Model::all()->toArray();
+// ... edit in UI ...
+Model::findOrFail($id)->update($edited);
+```
+
+### Recommended Base44 Pattern
+```typescript
+// Backend function for CRUD
+async function saveOfferGroup(req) {
+  const { id, data } = req.body;
+  if (id) {
+    await base44.entities.OfferGroup.update(id, data);
+  } else {
+    await base44.entities.OfferGroup.create(data);
+  }
+}
+
+// Frontend: React component + API calls
+const [offerGroups, setOfferGroups] = useState([]);
+const handleSave = async (index, data) => {
+  const response = await base44.functions.invoke('saveOfferGroup', data);
+  setOfferGroups(prev => [...prev.slice(0, index), response, ...prev.slice(index + 1)]);
+};
+```
+
+### Refactoring Benefits
+1. **Cleaner State:** React handles UI state, backend handles persistence
+2. **Better Error Handling:** Try/catch per operation
+3. **Proper Redirects:** No server redirects, emit frontend events
+4. **Authorization:** Check in backend function per action
+5. **Audit Trail:** Log all changes server-side
+6. **Pagination:** Lazy load large datasets
+7. **Mass Assignment:** Explicit field whitelist in backend
+
+---
+
 ## 🔗 Component Dependencies
 
 ### Services Used

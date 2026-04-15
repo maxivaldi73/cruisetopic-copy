@@ -212,6 +212,21 @@
 - [x] Materio/form_elements/Sliders.php
 - [x] Materio/form_elements/Switches.php
 
+### Extended UI Controllers (13 files)
+- [x] Materio/extended_ui/Avatar.php
+- [x] Materio/extended_ui/BlockUI.php
+- [x] Materio/extended_ui/DragAndDrop.php
+- [x] Materio/extended_ui/MediaPlayer.php
+- [x] Materio/extended_ui/PerfectScrollbar.php
+- [x] Materio/extended_ui/StarRatings.php
+- [x] Materio/extended_ui/SweetAlert.php
+- [x] Materio/extended_ui/TextDivider.php
+- [x] Materio/extended_ui/TimelineBasic.php
+- [x] Materio/extended_ui/TimelineFullscreen.php
+- [x] Materio/extended_ui/Tour.php
+- [x] Materio/extended_ui/Treeview.php
+- [x] Materio/extended_ui/Misc.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -262,7 +277,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 186 files documented
+### Total: 199 files documented
 
 ---
 

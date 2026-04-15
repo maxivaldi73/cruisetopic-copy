@@ -102,6 +102,27 @@
 ### Testing Controllers (1 file)
 - [x] FibosTests.php
 
+### UI Showcase Controllers - Materio/user_interface (19 files)
+- [x] Accordion.php
+- [x] Alerts.php
+- [x] Badges.php
+- [x] Buttons.php
+- [x] Carousel.php
+- [x] Collapse.php
+- [x] Dropdowns.php
+- [x] Footer.php
+- [x] ListGroups.php
+- [x] Modals.php
+- [x] Navbar.php
+- [x] Offcanvas.php
+- [x] PaginationBreadcrumbs.php
+- [x] Progress.php
+- [x] Spinners.php
+- [x] TabsPills.php
+- [x] Toasts.php
+- [x] TooltipsPopovers.php
+- [x] Typography.php
+
 ### Webhook Controllers (1 file)
 - [x] RevolutWebhookController.php
 
@@ -158,7 +179,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 114 files documented
+### Total: 133 files documented
 
 ---
 

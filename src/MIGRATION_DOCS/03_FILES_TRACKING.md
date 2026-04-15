@@ -99,6 +99,9 @@
 - [x] ExploraSyncJob.php
 - [x] AiGenerationJob.php
 
+### Testing Controllers (1 file)
+- [x] FibosTests.php
+
 ### Webhook Controllers (1 file)
 - [x] RevolutWebhookController.php
 
@@ -152,7 +155,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 113 files documented
+### Total: 114 files documented
 
 ---
 

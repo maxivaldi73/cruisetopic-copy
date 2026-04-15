@@ -372,6 +372,11 @@
 ### Settings Controllers (1 file)
 - [x] Admin/Setting/CabinTypeController.php
 
+### CRM Workflow Controllers (3 files)
+- [x] Admin/Setting/Crm/LeadStateController.php
+- [x] Admin/Setting/Crm/QuoteStatusesController.php
+- [x] Admin/Setting/Crm/WorkflowController.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -441,7 +446,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 340 files documented
+### Total: 343 files documented
 
 ---
 

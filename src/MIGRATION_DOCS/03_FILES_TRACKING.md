@@ -156,6 +156,9 @@
 ### Payment Controllers (1 file)
 - [x] RevolutController.php
 
+### Materio Maps Controllers (1 file)
+- [x] Materio/maps/Leaflet.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -206,7 +209,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 150 files documented
+### Total: 151 files documented
 
 ---
 

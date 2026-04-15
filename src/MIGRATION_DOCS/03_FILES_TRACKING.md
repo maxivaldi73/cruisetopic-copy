@@ -401,6 +401,10 @@
 ### AI Controller (1 file)
 - [x] Admin/Ai/AiController.php
 
+### Helper Classes (2 files)
+- [x] Helpers/DateHelper.php
+- [x] Helpers/Helpers.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -470,7 +474,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 353 files documented
+### Total: 355 files documented
 
 ---
 

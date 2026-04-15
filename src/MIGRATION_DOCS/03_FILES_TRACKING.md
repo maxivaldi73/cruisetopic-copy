@@ -99,6 +99,19 @@
 - [x] ExploraSyncJob.php
 - [x] AiGenerationJob.php
 
+### HTTP Middleware (11 files)
+- [x] Authenticate.php
+- [x] EncryptCookies.php
+- [x] InitializeWebsite.php
+- [x] Localization.php
+- [x] PreventRequestsDuringMaintenance.php
+- [x] RedirectIfAuthenticated.php
+- [x] TrimStrings.php
+- [x] TrustHosts.php
+- [x] TrustProxies.php
+- [x] ValidateSignature.php
+- [x] VerifyCsrfToken.php
+
 ### HTTP Traits (2 files)
 - [x] MediaUploadingTrait.php
 - [x] DropzoneMediaSyncTrait.php
@@ -136,7 +149,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 101 files documented
+### Total: 112 files documented
 
 ---
 
@@ -193,7 +206,6 @@
 - [ ] Services/Fibos/SyncService.php (parent class)
 - [ ] Services/Import/* (other importers)
 - [ ] Services/Search/* (if exists)
-- [ ] Middleware
 
 ### Jobs / Queue Classes (Priority: MEDIUM)
 - [x] ExploraSyncJob.php
@@ -235,6 +247,7 @@
 | Notifications Documented | 4 | ✅ Done |
 | Core Models Documented | 5 | ✅ Done |
 | Auth Models Documented | 3 | ✅ Done |
+| Middleware Documented | 11 | ✅ Done |
 | Models (estimated) | 110+ remaining | ⏳ Pending |
 | Controllers (estimated) | 5+ | ⏳ Pending |
 | Migrations (estimated) | 15+ | ⏳ Pending |

@@ -420,6 +420,18 @@
 - [x] Exceptions/Handler.php
 - [x] Exceptions/MscBookingException.php
 
+### Event Classes (10 files)
+- [x] Events/LeadAssigned.php
+- [x] Events/LeadStageChanged.php
+- [x] Events/LeadCreated.php
+- [x] Events/QuoteCreated.php
+- [x] Events/QuoteStatusChanged.php
+- [x] Events/QuoteUpdated.php
+- [x] Events/ReviewSaved.php
+- [x] Events/TicketAssigned.php
+- [x] Events/TaskSaved.php
+- [x] Events/UserRoleChangedEvent.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -489,7 +501,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 366 files documented
+### Total: 376 files documented
 
 ---
 

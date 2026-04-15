@@ -73,13 +73,50 @@ The policy relies on User model methods:
 
 ## LeadPolicy
 
-**Status:** Registered in AuthServiceProvider, content not shown
+**Location:** `App\Policies\Leads\LeadPolicy`  
+**Model:** `App\Models\Lead`  
+**Traits:** `HandlesAuthorization`, `HandlesSpatiePermissions`  
+**Permission Prefix:** `'Lead:'`
+
+### Configuration
 
 ```php
-protected $policies = [
-    Lead::class => LeadPolicy::class,
-];
+public function __construct()
+{
+    $this->permissionPrefix = 'Lead:';
+}
 ```
+
+Maps policy methods to Spatie permissions:
+- `view` → `Lead:show`
+- `update` → `Lead:edit`
+- etc. (via HandlesSpatiePermissions trait)
+
+### Methods
+
+#### `view(User $user, Lead $lead): bool`
+- **Condition:** User is assignee OR admin/super-admin
+- **Logic:** Assignee, admins, and super-admins can view
+- **Check:** `$user->id == $lead->assignee_id || $user->isAdmin() || $user->isSuperAdmin()`
+
+#### `update(User $user, Lead $lead): bool`
+- **Condition:** 
+  - Admin/Super-admin: always true
+  - Seller (assignee): only if lead NOT converted
+- **Logic:** Sellers can only update assigned leads in non-converted state
+- **Check:** 
+  ```php
+  if ($user->isAdmin() || $user->isSuperAdmin()) {
+      return true;
+  }
+  return $user->id == $lead->assignee_id && !$lead->isConverted();
+  ```
+
+### Notes
+
+- **Commented Methods:** viewAny, create, delete, restore, forceDelete (placeholder template)
+- **Fallback:** Other methods use HandlesSpatiePermissions trait
+  - Automatically checks Spatie permission: `$user->can('Lead:' . suffix)`
 
 ---
 
@@ -230,4 +267,3 @@ Or use entity-level RLS (Row-Level Security):
     }
   ]
 }
-`

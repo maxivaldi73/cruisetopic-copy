@@ -351,7 +351,10 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 263 files documented
+### Language Controller (1 file)
+- [x] Language/LanguageController.php
+
+### Total: 264 files documented
 
 ---
 

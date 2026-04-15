@@ -99,6 +99,10 @@
 - [x] ExploraSyncJob.php
 - [x] AiGenerationJob.php
 
+### HTTP Traits (2 files)
+- [x] MediaUploadingTrait.php
+- [x] DropzoneMediaSyncTrait.php
+
 ### HTTP Responses (2 files)
 - [x] GenericResponse.php
 - [x] LoginResponse.php
@@ -129,7 +133,7 @@
 - [x] SupplierRequest.php
 - [x] WebsiteRequest.php
 
-### Total: 96 files documented
+### Total: 98 files documented
 
 ---
 

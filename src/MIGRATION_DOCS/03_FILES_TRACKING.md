@@ -22,6 +22,12 @@
 - [x] SoapCostaClient.php
 - [x] NewCostaService.php
 
+### Services - Aroya (4 files)
+- [x] AroyaClient.php
+- [x] AroyaService.php
+- [x] AroyaSyncService.php
+- [x] AroyaXmlReader.php
+
 ### Config (1 file)
 - [x] config/fibos.php
 
@@ -125,7 +131,7 @@
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Services Documented | 16 | ✅ Done |
+| Services Documented | 20 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
@@ -135,7 +141,7 @@
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~4.8% mapped** |
+| **Total Known/Est** | **787+** | **~5.4% mapped** |
 
 ---
 

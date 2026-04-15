@@ -104,6 +104,36 @@ NewCostaService (Incomplete refactor)
 
 ---
 
+## 🌍 Aroya Services Graph
+
+```
+AroyaClient (HTTP XML wrapper)
+    ├── post() - Sends OTA request
+    └── getPosXml() - Point of Sale header
+
+AroyaService (OTA request builders)
+    ├── searchSailings() - OTA_CruiseSailAvailRQ
+    ├── checkFareAvailability() - OTA_CruiseFareAvailRQ
+    ├── getCabinCategories() - OTA_CruiseCategoryAvailRQ
+    ├── getSpecificCabins() - OTA_CruiseCabinAvailRQ
+    ├── getItineraryDesc() - OTA_CruiseItineraryDescRQ
+    ├── confirmPayment() - OTA_CruisePaymentRQ
+    └── cancelBooking() - OTA_CancelRQ
+
+AroyaXmlReader (OTA XML parser)
+    ├── parseSailings() - Parse SelectedSailing
+    ├── parseItinerary() - Parse CruiseItinInfo
+    └── parsePrices() - Parse CategoryOption
+
+AroyaSyncService (extends SyncService)
+    ├── importData() - Orchestrator
+    ├── processSailingMeta() - Extract ship
+    ├── processItineraryData() - Parse ports/segments
+    └── Mapping methods (Ship, Itinerary, Cruise, Price)
+```
+
+---
+
 ## 📊 DataTable Services Graph
 
 ```

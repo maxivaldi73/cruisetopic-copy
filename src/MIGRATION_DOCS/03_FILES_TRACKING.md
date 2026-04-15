@@ -369,6 +369,9 @@
 ### Sync Controller (1 file)
 - [x] Admin/Sync/SyncController.php
 
+### Settings Controllers (1 file)
+- [x] Admin/Setting/CabinTypeController.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -438,7 +441,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 339 files documented
+### Total: 340 files documented
 
 ---
 

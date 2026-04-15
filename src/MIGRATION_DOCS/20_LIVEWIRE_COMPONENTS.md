@@ -512,6 +512,81 @@ changeSelectedRole()  // Update selected role
 
 ---
 
+## 🧪 Test Components
+
+### TestSearchComponent
+**Location:** `App\Livewire\Tests\TestSearchComponent`  
+**Purpose:** Development/testing search functionality  
+**Status:** Experimental - hardcoded test filters
+
+**Features:**
+- Dynamic offer filtering
+- Multi-select cruiselines, ships, ports
+- Month & date range filtering
+- Itinerary counting
+- Filter options auto-generation from results
+
+**State Variables:**
+```php
+$selectedCruuiselines = []  // NOTE: typo in property name (Cruuiselines)
+$selectedShips = []
+$selectedPorts = []
+$selectedMonth
+$date
+$nights
+$text  // unused
+$itineraries  // results
+$totalItineraries  // count
+```
+
+**Key Methods:**
+
+#### `render()`
+- Creates SearchRequest from selected filters
+- Calls OfferService.searchItinerary()
+- Extracts available cruiselines, ships, ports, months from results
+- Returns view with populated filters
+
+#### Filter Selection Methods
+```php
+setCruiseline($id)    // Add/remove cruiseline toggle
+setShip($id)          // Add/remove ship toggle
+setPort($id)          // Add/remove port toggle
+setMonth($m)          // Set single month (non-toggle)
+```
+
+#### `addIfNotExist($id, $array): array`
+- Toggle logic: add if missing, remove if exists
+- Array re-indexed after removal
+- Used by cruiseline/ship/port selectors
+
+#### Data Extraction Methods
+```php
+getCruiselines()      // Extract unique cruiseline IDs from results
+getShips()            // Extract unique ship IDs from results
+getPorts()            // Extract unique departure ports from results
+```
+
+**Issues/Concerns:**
+1. **Typo:** Property named `selectedCruuiselines` (extra 'u')
+2. **Unused Code:** `$text` property, commented `updatedText()` listener
+3. **Inefficient Rendering:** Full query re-execution on every render
+4. **Missing Validation:** No checks for empty result sets
+5. **Hardcoded View:** Tightly coupled to `livewire.tests.test-search-component` view
+6. **SearchRequest Usage:** Creates but doesn't validate all parameters (empty arrays passed)
+
+**Dependencies:**
+- OfferService.searchItinerary(array)
+- SearchRequest model
+- Cruiseline, Ship, Port models
+
+**Notes:**
+- Located in Tests namespace (not a production component)
+- Likely used for development/debugging
+- Should be refactored or removed for production
+
+---
+
 ## 🔗 Component Dependencies
 
 ### Services Used

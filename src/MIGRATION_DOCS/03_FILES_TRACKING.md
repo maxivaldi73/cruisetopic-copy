@@ -231,6 +231,10 @@
 - [x] Materio/dashboard/Analytics.php
 - [x] Materio/dashboard/Crm.php
 
+### Charts Controllers (2 files)
+- [x] Materio/charts/ApexCharts.php
+- [x] Materio/charts/ChartJs.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -281,7 +285,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 201 files documented
+### Total: 203 files documented
 
 ---
 

@@ -477,6 +477,8 @@
 - [x] DataTables/Provider/SyncJobDataTable.php
 - [x] DataTables/Provider/Ship/ShipDataTable.php
 - [x] DataTables/Provider/Setting/FibosSettingDataTable.php
+- [x] DataTables/Provider/Msc/MscSettingsDataTable.php
+- [x] DataTables/Provider/Explora/ExploraSettingsDataTable.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -547,7 +549,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 418 files documented
+### Total: 420 files documented
 
 ---
 

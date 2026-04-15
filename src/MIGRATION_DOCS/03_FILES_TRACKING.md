@@ -159,6 +159,18 @@
 ### Materio Maps Controllers (1 file)
 - [x] Materio/maps/Leaflet.php
 
+### Materio Layout Controllers (10 files)
+- [x] Materio/layouts/Blank.php
+- [x] Materio/layouts/CollapsedMenu.php
+- [x] Materio/layouts/Container.php
+- [x] Materio/layouts/ContentNavSidebar.php
+- [x] Materio/layouts/ContentNavbar.php
+- [x] Materio/layouts/Fluid.php
+- [x] Materio/layouts/Horizontal.php
+- [x] Materio/layouts/Vertical.php
+- [x] Materio/layouts/WithoutMenu.php
+- [x] Materio/layouts/WithoutNavbar.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -209,7 +221,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 151 files documented
+### Total: 161 files documented
 
 ---
 

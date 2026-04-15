@@ -108,6 +108,24 @@
 - [x] Materio/tables/DatatableAdvanced.php
 - [x] Materio/tables/DatatableExtensions.php
 
+### Materio Page Controllers (16 files)
+- [x] Materio/pages/AccountSettingsAccount.php
+- [x] Materio/pages/AccountSettingsBilling.php
+- [x] Materio/pages/AccountSettingsNotifications.php
+- [x] Materio/pages/AccountSettingsConnections.php
+- [x] Materio/pages/AccountSettingsSecurity.php
+- [x] Materio/pages/MiscComingSoon.php
+- [x] Materio/pages/MiscError.php
+- [x] Materio/pages/MiscNotAuthorized.php
+- [x] Materio/pages/MiscServerError.php
+- [x] Materio/pages/MiscUnderMaintenance.php
+- [x] Materio/pages/Faq.php
+- [x] Materio/pages/Pricing.php
+- [x] Materio/pages/UserProfile.php
+- [x] Materio/pages/UserProjects.php
+- [x] Materio/pages/UserTeams.php
+- [x] Materio/pages/UserConnections.php
+
 ### UI Showcase Controllers - Materio/user_interface (19 files)
 - [x] Accordion.php
 - [x] Alerts.php
@@ -185,7 +203,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 133 files documented
+### Total: 149 files documented
 
 ---
 

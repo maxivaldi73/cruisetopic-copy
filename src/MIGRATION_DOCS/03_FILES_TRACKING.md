@@ -357,7 +357,11 @@
 ### Checkout Controllers (1 file)
 - [x] Checkout/CheckoutPaymentController.php
 
-### Total: 265 files documented
+### API Controllers (2 files)
+- [x] Api/ApiAuthController.php
+- [x] Api/ItinerariesController.php
+
+### Total: 267 files documented
 
 ---
 

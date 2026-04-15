@@ -2,7 +2,7 @@
 
 ## 📂 Already Documented
 
-### Services (7 files)
+### Services - Fibos (7 files)
 - [x] FibosApi.php
 - [x] FibosContentsApi.php  
 - [x] FibosSyncService.php
@@ -10,6 +10,10 @@
 - [x] FibosService.php
 - [x] FibosMapsService.php
 - [x] TranslationImportService.php
+
+### Services - Explora (2 files)
+- [x] ExploraClient.php
+- [x] ExploraSyncService.php
 
 ### Config (1 file)
 - [x] config/fibos.php
@@ -19,7 +23,17 @@
 - [x] RequestItinerary.php
 - [x] RequestSearchBySeaPricing.php
 
-### Total: 12 files documented
+### Exceptions (2 files)
+- [x] ConfigurationException.php
+- [x] FibosApiException.php
+
+### Factories (1 file)
+- [x] CruiseRealTimeFactory.php
+
+### Temp Models (1 file)
+- [x] TempElementEntity.php
+
+### Total: 18 files documented
 
 ---
 
@@ -100,16 +114,17 @@
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Services Documented | 7 | ✅ Done |
+| Services Documented | 9 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
+| Temp Models Documented | 1 | ✅ Done |
 | Models (estimated) | 18 | ⏳ Pending |
 | Controllers (estimated) | 5+ | ⏳ Pending |
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~2.7% mapped** |
+| **Total Known/Est** | **787+** | **~3.5% mapped** |
 
 ---
 

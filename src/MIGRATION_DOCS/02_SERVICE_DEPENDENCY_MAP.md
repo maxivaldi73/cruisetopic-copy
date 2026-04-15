@@ -43,6 +43,31 @@ TranslationImportService (Generic Importer)
 
 ---
 
+## 🏗️ Explora Services Graph
+
+```
+ExploraClient (HTTP REST Client)
+    ├── config('explora.*')
+    ├── getToken() → sessionToken
+    ├── clientRequest() → Guzzle response
+    ├── getItinerariesFile() → CSV content
+    └── getPricingFile() → CSV content
+
+ExploraSyncService (extends SyncService)
+    ├── uses ExploraClient
+    ├── uses CsvReaderService
+    ├── processes: Itineraries, Prices, Ports, Ships, Cabins
+    ├── maps: Port, Ship, Itinerary, Cruise, Price
+    ├── caches files (1 hour)
+    ├── deduplicates itineraries
+    └── generates SyncJob records
+
+TempElementEntity (Temp storage model)
+    └── table: explora_elements_temp
+```
+
+---
+
 ## 📦 Models Referenced
 
 | Model | Used By | Purpose |

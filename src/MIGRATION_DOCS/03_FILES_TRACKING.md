@@ -391,6 +391,10 @@
 ### Fibos Setting Controller (1 file)
 - [x] Admin/Fibos/FibosSettingController.php
 
+### Destination Controller (2 files)
+- [x] Admin/Destination/DestinationController.php
+- [x] Admin/Destination/EditDestination.php (action)
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -460,7 +464,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 349 files documented
+### Total: 351 files documented
 
 ---
 

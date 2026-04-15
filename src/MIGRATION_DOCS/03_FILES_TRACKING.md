@@ -28,6 +28,9 @@
 - [x] AroyaSyncService.php
 - [x] AroyaXmlReader.php
 
+### Utility Services (1 file)
+- [x] AlertService.php
+
 ### Config (1 file)
 - [x] config/fibos.php
 
@@ -131,7 +134,7 @@
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Services Documented | 20 | ✅ Done |
+| Services Documented | 21 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
@@ -141,7 +144,7 @@
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~5.4% mapped** |
+| **Total Known/Est** | **787+** | **~5.7% mapped** |
 
 ---
 

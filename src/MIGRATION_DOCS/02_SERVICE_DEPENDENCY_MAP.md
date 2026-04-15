@@ -134,6 +134,17 @@ AroyaSyncService (extends SyncService)
 
 ---
 
+## 📊 Utility Services Graph
+
+```
+AlertService (UI feedback)
+    ├── alertOperazioneEseguita() - Success toast + redirect
+    ├── alertRelazioniEsistenti() - Info toast + redirect
+    └── alertBackWithError() - Error toast + back with input
+```
+
+---
+
 ## 📊 DataTable Services Graph
 
 ```

@@ -77,7 +77,13 @@
 - [x] PortObserver.php
 - [x] QuoteDetailObserver.php
 
-### Total: 52 files documented
+### Notifications (4 files)
+- [x] MegaJsonReadyNotification.php
+- [x] NewUserPasswordNotification.php
+- [x] ReviewNotification.php
+- [x] TicketAssignedNotification.php
+
+### Total: 56 files documented
 
 ---
 
@@ -170,12 +176,13 @@
 | Factories Documented | 1 | ✅ Done |
 | Temp Models Documented | 1 | ✅ Done |
 | Observers Documented | 3 | ✅ Done |
+| Notifications Documented | 4 | ✅ Done |
 | Models (estimated) | 18 | ⏳ Pending |
 | Controllers (estimated) | 5+ | ⏳ Pending |
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~9.7% mapped** |
+| **Total Known/Est** | **787+** | **~10.5% mapped** |
 
 ---
 

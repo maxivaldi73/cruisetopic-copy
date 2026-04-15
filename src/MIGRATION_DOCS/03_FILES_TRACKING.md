@@ -14,7 +14,12 @@
 ### Config (1 file)
 - [x] config/fibos.php
 
-### Total: 8 files documented
+### Fibos Requests (3 files)
+- [x] HeaderRequest.php
+- [x] RequestItinerary.php
+- [x] RequestSearchBySeaPricing.php
+
+### Total: 12 files documented
 
 ---
 
@@ -49,9 +54,9 @@
 - [ ] routes/api.php
 
 ### Requests & Fibos Requests (Priority: MEDIUM)
-- [ ] Services/Fibos/Requests/HeaderRequest.php
-- [ ] Services/Fibos/Requests/RequestItinerary.php
-- [ ] Services/Fibos/Requests/RequestSearchBySeaPricing.php
+- [x] Services/Fibos/Requests/HeaderRequest.php
+- [x] Services/Fibos/Requests/RequestItinerary.php
+- [x] Services/Fibos/Requests/RequestSearchBySeaPricing.php
 - [ ] Form Requests (validation)
 
 ### Exceptions (Priority: MEDIUM)
@@ -91,12 +96,13 @@
 | Category | Count | Status |
 |----------|-------|--------|
 | Services Documented | 7 | ✅ Done |
+| Requests Documented | 3 | ✅ Done |
 | Models (estimated) | 18 | ⏳ Pending |
 | Controllers (estimated) | 5+ | ⏳ Pending |
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~1% mapped** |
+| **Total Known/Est** | **787+** | **~2% mapped** |
 
 ---
 

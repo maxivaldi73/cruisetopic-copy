@@ -31,6 +31,24 @@
 ### Utility Services (1 file)
 - [x] AlertService.php
 
+### Service Providers (16 files)
+- [x] AppServiceProvider.php
+- [x] AroyaServiceProvider.php
+- [x] AuthServiceProvider.php
+- [x] BroadcastServiceProvider.php
+- [x] CostaServiceProvider.php
+- [x] EventServiceProvider.php
+- [x] ExploraServiceProvider.php
+- [x] FibosServiceProvider.php
+- [x] FortifyServiceProvider.php
+- [x] ItineraryServiceProvider.php
+- [x] JetstreamServiceProvider.php
+- [x] MenuServiceProvider.php
+- [x] MscBookingServiceProvider.php
+- [x] MscServiceProvider.php
+- [x] PortServiceProvider.php
+- [x] RouteServiceProvider.php
+
 ### Config (1 file)
 - [x] config/fibos.php
 
@@ -135,6 +153,7 @@
 | Category | Count | Status |
 |----------|-------|--------|
 | Services Documented | 21 | ✅ Done |
+| Providers Documented | 16 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
@@ -144,7 +163,7 @@
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~5.7% mapped** |
+| **Total Known/Est** | **787+** | **~8.5% mapped** |
 
 ---
 

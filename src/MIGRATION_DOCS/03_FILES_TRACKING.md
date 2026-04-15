@@ -132,8 +132,11 @@
 - [x] SupplierCancellationConditionRequest.php
 - [x] SupplierRequest.php
 - [x] WebsiteRequest.php
+- [x] QuoteRequest.php (Quote/checkout)
+- [x] StoreProductRequest.php (Product create)
+- [x] UpdateProductRequest.php (Product update)
 
-### Total: 98 files documented
+### Total: 101 files documented
 
 ---
 
@@ -224,7 +227,7 @@
 | Providers Documented | 16 | ✅ Done |
 | Policies Documented | 3 | ✅ Done |
 | Fibos Requests Documented | 3 | ✅ Done |
-| Form Requests Documented | 24 | ✅ Done |
+| Form Requests Documented | 27 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
 | Temp Models Documented | 1 | ✅ Done |

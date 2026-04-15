@@ -31,6 +31,9 @@
 | RegistrationRequest | User registration | Simple |
 | SavePortMappingImportRequest | Port mapping import | Simple |
 | ShipRequest | Ship with image | Medium |
+| QuoteRequest | Quote creation (checkout) | Simple |
+| StoreProductRequest | Create product (service/discount) | Complex |
+| UpdateProductRequest | Update product (service/discount) | Complex |
 | SupplierCancellationConditionRequest | Supplier cancellation | Complex |
 | SupplierRequest | Supplier config | Medium |
 | WebsiteRequest | Website/domain config | Medium |
@@ -781,6 +784,182 @@ public function rules(): array
 
 ---
 
+### QuoteRequest
+
+**Location:** `App\Http\Requests\Quote\QuoteRequest`  
+**Purpose:** Create quote from checkout with cruise, cabin, and passenger info
+
+```php
+public function rules(): array
+{
+    return [
+        'cruise_id' => 'required|integer|exists:cruises,id',
+        'cabin_id' => 'required|integer|exists:cabins,id',
+        'nr_adults' => 'required|integer|min:1',
+        'nr_teenagers' => 'nullable|integer|min:0',
+        'nr_children' => 'nullable|integer|min:0',
+        'firstname' => 'required|string',
+        'lastname' => 'required|string',
+        'email' => 'required|email',
+        'phone' => 'required|string',
+        'privacy' => 'required|nullable',
+        'newsletter' => 'nullable|boolean',
+    ];
+}
+```
+
+**Fields:**
+- Cruise/Cabin: `cruise_id`, `cabin_id` (FK validation)
+- Passengers: `nr_adults` (min 1), `nr_teenagers`, `nr_children` (optional)
+- Contact: `firstname`, `lastname`, `email`, `phone` (all required)
+- Consent: `privacy` (required but can be null?), `newsletter` (optional boolean)
+
+**Issues:**
+1. `privacy` marked `required|nullable` — contradictory
+2. No max length validation on name/phone fields
+3. Adult count minimum = 1 (enforces at least one adult)
+
+---
+
+### StoreProductRequest
+
+**Location:** `App\Http\Requests\Product\StoreProductRequest`  
+**Purpose:** Create product (service or discount) with conditional pricing and relationships
+
+```php
+public function rules(): array
+{
+    return [
+        'type' => 'required|in:service,discount',
+        'title' => 'required|string|max:255',
+        'code' => 'required|string|max:255|unique:products,code',
+        'category' => 'nullable|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'nullable|numeric|min:0|required_if:type,service',
+        'currency' => 'nullable|string|size:3|required_if:type,service|required_if:discount_type,amount',
+        'is_tax_included' => 'boolean',
+        'tax_rate' => 'nullable|numeric|min:0',
+        'discount_type' => 'nullable|in:amount,percent|required_if:type,discount',
+        'discount_value' => 'nullable|numeric|min:0|required_if:type,discount',
+        'applies_to_type' => 'nullable|string|max:255',
+        'applies_to_code' => 'nullable|string|max:255',
+        'unit' => 'nullable|string|max:50',
+        'min_quantity' => 'nullable|integer|min:0',
+        'max_quantity' => 'nullable|integer|min:0',
+        'allow_manual_price' => 'boolean',
+        'markets' => 'nullable|array',
+        'markets.*' => 'integer|exists:markets,id',
+        'cruiselines' => 'nullable|array',
+        'cruiselines.*' => 'integer|exists:cruiselines,id',
+        'ships' => 'nullable|array',
+        'ships.*' => 'integer|exists:ships,id',
+        'cabin_types' => 'nullable|array',
+        'cabin_types.*' => 'integer|exists:cabin_types,id',
+        'images' => 'nullable|array',
+        'images.*' => 'string',
+        'is_active' => 'boolean',
+    ];
+}
+
+public function prepareForValidation(): void
+{
+    $data = [
+        'is_tax_included' => $this->boolean('is_tax_included'),
+        'allow_manual_price' => $this->boolean('allow_manual_price'),
+        'is_active' => $this->boolean('is_active'),
+    ];
+
+    // If discount type and no price, default to 0
+    if ($this->input('type') === 'discount') {
+        $price = $this->input('price');
+        if ($price === null || $price === '') {
+            $data['price'] = 0;
+        }
+    }
+
+    $this->merge($data);
+}
+```
+
+**Field Groups:**
+
+| Group | Fields | Purpose |
+|-------|--------|---------|
+| **Core** | `type`, `title`, `code` | Product identifier (type: service or discount) |
+| **Pricing (Service)** | `price`, `currency`, `is_tax_included`, `tax_rate` | Only required if type=service |
+| **Discount (Discount)** | `discount_type`, `discount_value` | Only required if type=discount |
+| **Scope** | `applies_to_type`, `applies_to_code` | What the discount/service applies to |
+| **Quantity** | `unit`, `min_quantity`, `max_quantity` | Quantity constraints |
+| **Relationships** | `markets`, `cruiselines`, `ships`, `cabin_types` | Filter availability per scope |
+| **Media** | `images` | Product images (URLs) |
+| **Status** | `is_active`, `allow_manual_price` | Visibility and pricing override |
+
+**Conditional Logic:**
+- `price` required if `type=service`
+- `currency` required if `type=service` OR `discount_type=amount`
+- `discount_type` required if `type=discount`
+- `discount_value` required if `type=discount`
+
+**prepareForValidation() Actions:**
+1. Normalize boolean fields from request
+2. If discount type with missing price → set price = 0 (prevents DB NOT NULL errors)
+
+**Issues:**
+
+1. **Contradictory Nullable Rules:**
+   - `price` has `nullable|required_if`
+   - For discounts, price arrives empty but must be nulled/defaulted
+   - Workaround in `prepareForValidation()` sets it to 0
+
+2. **Complex Conditional Requirements:**
+   - `currency` required if `type=service` OR `discount_type=amount`
+   - Can't express second condition (discount_type=amount) in rules alone
+   - Relies on custom validation or frontend logic
+
+3. **Relationship Array Validation:**
+   - Markets, cruiselines, ships, cabin_types all validated but no max length
+   - Could accept 1000s of IDs
+
+4. **Image Handling:**
+   - Images stored as URLs (strings) not file uploads
+   - No URL format validation
+
+5. **No Authorization:**
+   - `authorize()` returns true always (should check admin role)
+
+---
+
+### UpdateProductRequest
+
+**Location:** `App\Http\Requests\Product\UpdateProductRequest`  
+**Purpose:** Update product (same as StoreProductRequest but with unique constraint exclusion)
+
+```php
+public function rules(): array
+{
+    $productId = $this->route('product')->id ?? null;
+
+    return [
+        'type' => 'required|in:service,discount',
+        // ... all same fields as StoreProductRequest ...
+        'code' => 'required|string|max:255|unique:products,code,' . $productId,
+    ];
+}
+
+public function prepareForValidation(): void
+{
+    // ... identical to StoreProductRequest ...
+}
+```
+
+**Key Difference:**
+- `code` validation: `unique:products,code,{productId}` excludes current product from unique check
+
+**Issues:**
+- Same as StoreProductRequest (complex conditionals, nullable contradictions)
+
+---
+
 ## 📊 Validation Patterns Summary
 
 ### Common Patterns
@@ -924,4 +1103,4 @@ await base44.entities.Cabin.create(data);
 // After: Base44 upload + URL storage
 const { file_url } = await base44.integrations.Core.UploadFile({ file });
 await base44.entities.Cabin.create({ ...data, image_url: file_url });
-``
+`

@@ -243,6 +243,64 @@
 - [x] Materio/cards/CardStatistics.php
 - [x] Materio/cards/CardGamifications.php
 
+### Authentication Controllers (13 files)
+- [x] Materio/authentications/LoginBasic.php
+- [x] Materio/authentications/LoginCover.php
+- [x] Materio/authentications/RegisterBasic.php
+- [x] Materio/authentications/RegisterCover.php
+- [x] Materio/authentications/RegisterMultiSteps.php
+- [x] Materio/authentications/ForgotPasswordBasic.php
+- [x] Materio/authentications/ForgotPasswordCover.php
+- [x] Materio/authentications/ResetPasswordBasic.php
+- [x] Materio/authentications/ResetPasswordCover.php
+- [x] Materio/authentications/VerifyEmailBasic.php
+- [x] Materio/authentications/VerifyEmailCover.php
+- [x] Materio/authentications/TwoStepsBasic.php
+- [x] Materio/authentications/TwoStepsCover.php
+
+### Apps Controllers (41 files)
+- [x] Materio/apps/UserList.php
+- [x] Materio/apps/UserViewAccount.php
+- [x] Materio/apps/UserViewBilling.php
+- [x] Materio/apps/UserViewConnections.php
+- [x] Materio/apps/UserViewNotifications.php
+- [x] Materio/apps/UserViewSecurity.php
+- [x] Materio/apps/EcommerceDashboard.php
+- [x] Materio/apps/EcommerceCustomerAll.php
+- [x] Materio/apps/EcommerceCustomerDetailsOverview.php
+- [x] Materio/apps/EcommerceCustomerDetailsBilling.php
+- [x] Materio/apps/EcommerceCustomerDetailsNotifications.php
+- [x] Materio/apps/EcommerceCustomerDetailsSecurity.php
+- [x] Materio/apps/EcommerceOrderList.php
+- [x] Materio/apps/EcommerceOrderDetails.php
+- [x] Materio/apps/EcommerceManageReviews.php
+- [x] Materio/apps/EcommerceProductList.php
+- [x] Materio/apps/EcommerceProductCategory.php
+- [x] Materio/apps/EcommerceProductAdd.php
+- [x] Materio/apps/EcommerceReferrals.php
+- [x] Materio/apps/EcommerceSettingsDetails.php
+- [x] Materio/apps/EcommerceSettingsCheckout.php
+- [x] Materio/apps/EcommerceSettingsLocations.php
+- [x] Materio/apps/EcommerceSettingsNotifications.php
+- [x] Materio/apps/EcommerceSettingsPayments.php
+- [x] Materio/apps/EcommerceSettingsShipping.php
+- [x] Materio/apps/InvoiceList.php
+- [x] Materio/apps/InvoiceAdd.php
+- [x] Materio/apps/InvoiceEdit.php
+- [x] Materio/apps/InvoicePreview.php
+- [x] Materio/apps/InvoicePrint.php
+- [x] Materio/apps/LogisticsDashboard.php
+- [x] Materio/apps/LogisticsFleet.php
+- [x] Materio/apps/Email.php
+- [x] Materio/apps/Chat.php
+- [x] Materio/apps/Calendar.php
+- [x] Materio/apps/Kanban.php
+- [x] Materio/apps/AccessRoles.php
+- [x] Materio/apps/AccessPermission.php
+- [x] Materio/apps/AcademyDashboard.php
+- [x] Materio/apps/AcademyCourse.php
+- [x] Materio/apps/AcademyCourseDetails.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -293,7 +351,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 209 files documented
+### Total: 263 files documented
 
 ---
 

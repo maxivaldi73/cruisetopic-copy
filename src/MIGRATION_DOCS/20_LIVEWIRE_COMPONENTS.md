@@ -978,6 +978,286 @@ export default function ShipShowPage({ shipId }) {
 
 ---
 
+## 🌍 Port Components
+
+### PortCard
+
+**Location:** `App\Livewire\Ports\PortCard`  
+**Purpose:** Display port summary card (for listing/carousel)
+
+**State Variables:**
+```php
+public $port                 // Port model (passed to component)
+public $formattedPortName    // Formatted port name
+public $itinerariesCount     // Count of unique itineraries
+public $portCruiselines      // Top 4 cruiselines operating from port
+public $backgroundUrl        // Cover image URL with fallback
+```
+
+**Key Methods:**
+
+#### `mount()`
+- Get top 4 cruiselines via `port->Cruiselines()` (array_slice)
+- Count unique itineraries via `port->Itineraries()->groupBy('itineraryCode')->get()->count()`
+- Get cover image with hardcoded fallback (lighthouse icon from vecteezy.com)
+- Format port name via `fixAndFormatPortName()`
+
+#### `fixAndFormatPortName($name)`
+- HTML entity decode (UTF-8)
+- Capitalize first letter of each word and special characters
+- Returns formatted port name
+
+**Features:**
+- Port name formatting
+- Itinerary count
+- Top 4 cruiselines display
+- Cover image with fallback
+
+**Issues:**
+1. **Hardcoded Fallback URL:** External image (should be app asset)
+2. **Double Media Call:** getFirstMediaUrl() called twice in condition
+3. **Cruiselines Method Call:** Calls `port->Cruiselines()` method (performance concern if large dataset)
+4. **Itinerary Grouping:** In-memory groupBy after fetch (should be DB query)
+
+---
+
+### PortsDestinationsTab
+
+**Location:** `App\Livewire\Ports\PortsDestinationsTab`  
+**Purpose:** Render ports for a specific destination tab
+
+**State Variables:**
+```php
+public $destination     // Destination model (passed to component)
+public $loop            // Blade @foreach loop variable (unused?)
+public $destinationId   // Stored destination ID (set in mount)
+```
+
+**Key Methods:**
+
+#### `mount($destination)`
+- Receives destination model
+- Stores only `destination->id` (not the full destination)
+- **Issue:** Destination model passed but not stored
+
+#### `render()`
+- Returns view with destination context
+
+**Features:**
+- Per-destination port display
+- Minimal logic
+
+**Issues:**
+1. **Unused Parameter:** Destination passed but not stored
+2. **Unused Variables:** `$loop` property never used
+3. **Missing Data Fetching:** No ports loaded in component
+4. **Incomplete Implementation:** View likely handles port loading
+
+---
+
+### PortShowComponent
+
+**Location:** `App\Livewire\Ports\PortShowComponent`  
+**Purpose:** Detailed port page display
+
+**State Variables:**
+```php
+public $port             // Port model (passed to component)
+public $backgroundUrl    // Cover image URL
+```
+
+**Key Methods:**
+
+#### `render()`
+- Sets background URL (cover image with hardcoded fallback)
+- **Issue:** Logic runs in render() instead of mount()
+- Gets called on every re-render (inefficient)
+
+**Features:**
+- Port detail display
+- Background image
+
+**Issues:**
+1. **Logic in render():** Should be in mount() for performance
+2. **Hardcoded Fallback URL:** External image (same lighthouse icon as PortCard)
+3. **Double Media Call:** getFirstMediaUrl() called twice in condition
+4. **No Additional Logic:** Display-only component
+
+---
+
+### PortsList
+
+**Location:** `App\Livewire\Ports\PortsList`  
+**Purpose:** Paginated list of ports with destination-based filtering and tabs
+
+**State Variables:**
+```php
+public $perPage = 12                // Ports per page
+public $destinations = []           // All enabled destinations (parent_id = null)
+public $activeTab = null            // Current tab ('all' or destination ID)
+public $portsByTab = []             // Ports per tab (cached, keyed by tabId)
+public $pageByTab = []              // Current page per tab
+public $hasMoreByTab = []           // Has more results per tab
+public $loadingTab = false          // Loading state
+```
+
+**Key Methods:**
+
+#### `mount()`
+- Load enabled parent destinations only
+- Order by name
+- Initialize 'all' tab (all ports)
+- Load first page of ports for 'all' tab
+
+#### `initTab($tabId)`
+- Initialize page=1, empty ports array, hasMore=true for new tab
+- Guard: only initialize if not already initialized
+
+#### `selectTab($tabId)`
+- Change active tab
+- Initialize tab if needed
+- Load ports only if not already cached
+
+#### `loadMorePorts()`
+- Load next page for active tab
+- Increment page counter
+
+#### `loadPortsForTab($tabId)`
+- **Query Building:**
+  - Select: id, name, score, sunny_days, temperature_avg
+  - Filter: whereHas('itineraries') (only ports with cruises)
+  - Eager load: media (cover), itineraries with cruiselines + logos
+  - Count: itineraries_count via withCount
+  - Order: by score DESC, then name ASC
+  - Filter by destination: if tabId !== 'all', whereHas Destinations with id
+  
+- **Pagination:**
+  - Offset: (page - 1) * perPage
+  - Fetch: perPage + 1 (to detect if more results)
+  - hasMore flag set if results > perPage
+  
+- **Data Processing:**
+  - Map ports to array format
+  - Extract unique cruiselines (up to 5) with logos
+  - Format port names via fixAndFormatPortName()
+  - Add computed properties (formatted_name, cover_url, cruiselines)
+  
+- **State Management:**
+  - Merge with existing ports (pagination accumulation)
+  - Increment page counter
+  - Update hasMore flag
+
+#### `fixAndFormatPortName($name)`
+- HTML entity decode + capitalize
+- Same as PortCard method
+
+**Features:**
+- Multi-tab filtering (All + per-destination tabs)
+- Lazy-loaded pagination per tab
+- Eager loading optimization
+- Cruiseline logos display (up to 5)
+- Port scoring and sorting
+- Climate data (sunny_days, temperature_avg)
+
+**Issues:**
+1. **Hardcoded Fallback URLs:** Multiple hardcoded image URLs (lighthouse, cruiseline logo)
+2. **Duplicate Method:** fixAndFormatPortName() exists in PortCard + PortsList (code duplication)
+3. **In-Memory Uniquing:** `.unique('id')` on itineraries (should use DB distinct)
+4. **Static Limit:** 5 cruiselines hardcoded
+5. **Media Double-Call:** Not in query but post-processing via getFirstMediaUrl()
+
+---
+
+## Port Components Comparison
+
+| Feature | PortCard | PortsDestinationsTab | PortShowComponent | PortsList |
+|---------|----------|---------------------|-------------------|-----------|
+| Purpose | Card display | Destination tab | Detail page | Full list/pagination |
+| Data Loaded | Count + cruiselines | None | Image only | Full ports with filters |
+| Filtering | None | Destination | None | By destination (tabbed) |
+| Pagination | N/A | N/A | N/A | Yes (per-tab) |
+| Cruiselines | Top 4 | None | None | Top 5 (post-process) |
+| Interactivity | Display | Display | Display | Tab switch + Load More |
+
+---
+
+## Port Components Common Issues
+
+### Shared Problems
+1. **Hardcoded Fallback URLs:** 3 different hardcoded URLs (lighthouse, cruiseline logo) → should be config constants
+2. **Code Duplication:** fixAndFormatPortName() in both PortCard and PortsList
+3. **Media Efficiency:** getFirstMediaUrl() called multiple times (double-call pattern)
+4. **In-Memory Processing:** unique(), filtering done in PHP after fetch (should be DB queries)
+5. **Incomplete Implementation:** PortsDestinationsTab has minimal logic, likely incomplete
+
+### Security Concerns
+- No authorization checks
+- Direct model access via properties
+
+### Performance Issues
+- PortCard: Full Cruiselines() relation loaded
+- PortsList: 5 cruiselines extracted post-fetch (in-memory unique)
+- Media queries in eager loading could be optimized
+
+---
+
+## Migration Notes for Port Components (Base44)
+
+### Hardcoded Assets to Move to Config
+```php
+// Current: Scattered throughout
+'https://static.vecteezy.com/...'
+'https://ih1.redbubble.net/...'
+
+// Better: Config constant
+config('app.fallback_images.port_cover')
+config('app.fallback_images.cruiseline_logo')
+```
+
+### Method Extraction
+- Move `fixAndFormatPortName()` to dedicated PortFormatter utility
+- Use shared utility from all components
+
+### Base44 Refactor
+
+**Backend Function: getPortsList**
+```typescript
+async function getPortsList(req) {
+  const { tabId, page, perPage } = req.body;
+  const ports = await base44.entities.Port.filter({
+    destination_id: tabId !== 'all' ? tabId : null,
+  });
+  
+  return {
+    ports: ports.slice((page - 1) * perPage, page * perPage),
+    hasMore: ports.length > page * perPage,
+    total: ports.length
+  };
+}
+```
+
+**React Component Pattern:**
+```typescript
+const [activeTab, setActiveTab] = useState('all');
+const [ports, setPorts] = useState([]);
+
+const loadPorts = async (tabId) => {
+  const data = await base44.functions.invoke('getPortsList', 
+    { tabId, page: 1, perPage: 12 }
+  );
+  setPorts(data.ports);
+};
+```
+
+### Benefits
+1. **Shared Constants:** Centralized fallback URLs
+2. **No Duplication:** Single formatter utility
+3. **Clean Separation:** Backend handles DB, frontend handles UI
+4. **Easier Testing:** Functions testable independently
+5. **Reusability:** Function callable from multiple pages
+
+---
+
 ## 🔗 Component Dependencies
 
 ### Services Used

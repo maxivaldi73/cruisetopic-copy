@@ -108,6 +108,9 @@
 - [x] Materio/tables/DatatableAdvanced.php
 - [x] Materio/tables/DatatableExtensions.php
 
+### Materio Modal Controller (1 file)
+- [x] Materio/modal/ModalExample.php
+
 ### Materio Page Controllers (16 files)
 - [x] Materio/pages/AccountSettingsAccount.php
 - [x] Materio/pages/AccountSettingsBilling.php
@@ -203,7 +206,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 149 files documented
+### Total: 150 files documented
 
 ---
 

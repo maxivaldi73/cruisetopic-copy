@@ -15,6 +15,13 @@
 - [x] ExploraClient.php
 - [x] ExploraSyncService.php
 
+### Services - Costa (5 files)
+- [x] CostaClient.php
+- [x] CostaService.php
+- [x] CostaSyncService.php
+- [x] SoapCostaClient.php
+- [x] NewCostaService.php
+
 ### Config (1 file)
 - [x] config/fibos.php
 
@@ -118,7 +125,7 @@
 
 | Category | Count | Status |
 |----------|-------|--------|
-| Services Documented | 11 | ✅ Done |
+| Services Documented | 16 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
 | Factories Documented | 1 | ✅ Done |
@@ -128,7 +135,7 @@
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~3.8% mapped** |
+| **Total Known/Est** | **787+** | **~4.8% mapped** |
 
 ---
 

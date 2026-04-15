@@ -68,6 +68,42 @@ TempElementEntity (Temp storage model)
 
 ---
 
+## 🏢 Costa Services Graph
+
+```
+CostaClient (Guzzle HTTP SOAP)
+    ├── ENDPOINT_AVAILABILITY
+    ├── getItineraries() → Guzzle POST
+    ├── getItinerariesDetails()
+    └── parseItineraryDetail()
+
+CostaService (Legacy orchestrator)
+    ├── uses CostaClient
+    ├── syncItineraries()
+    ├── syncElementsPrices()
+    └── Generates models (Ship, Cabin, Itinerary, Price)
+
+CostaSyncService (extends SyncService)
+    ├── uses SoapCostaClient
+    ├── importCatalog() → ZIP download
+    ├── importDestinations/Itineraries/Cruises/Prices
+    └── Recursive catalog parsing
+
+SoapCostaClient (Native SOAP)
+    ├── buildSoapClient() → WSDL parsing
+    ├── ENDPOINT_AVAILABILITY (queries)
+    ├── ENDPOINT_EXPORT (catalog/pricing)
+    ├── listAllPorts/Ships/Destinations
+    ├── getCruiseDetailed()
+    └── exportCatalog/Price/FarePrices/etc.
+
+NewCostaService (Incomplete refactor)
+    ├── Maps Itineraries, Ships, Prices (done)
+    └── Unimplemented TODOs (ports, elements)
+```
+
+---
+
 ## 📊 DataTable Services Graph
 
 ```

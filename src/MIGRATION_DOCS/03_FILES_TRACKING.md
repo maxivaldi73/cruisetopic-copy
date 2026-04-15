@@ -177,6 +177,9 @@
 ### Language Controller (1 file)
 - [x] Materio/language/LanguageController.php
 
+### Icons Controllers (1 file)
+- [x] Materio/icons/RiIcons.php
+
 ### HTTP Middleware (11 files)
 - [x] Authenticate.php
 - [x] EncryptCookies.php
@@ -227,7 +230,7 @@
 - [x] StoreProductRequest.php (Product create)
 - [x] UpdateProductRequest.php (Product update)
 
-### Total: 163 files documented
+### Total: 164 files documented
 
 ---
 

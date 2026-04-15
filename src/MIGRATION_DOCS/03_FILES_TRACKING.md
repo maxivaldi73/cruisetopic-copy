@@ -354,7 +354,10 @@
 ### Language Controller (1 file)
 - [x] Language/LanguageController.php
 
-### Total: 264 files documented
+### Checkout Controllers (1 file)
+- [x] Checkout/CheckoutPaymentController.php
+
+### Total: 265 files documented
 
 ---
 

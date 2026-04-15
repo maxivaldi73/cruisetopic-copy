@@ -63,6 +63,11 @@
 - [x] Services/Fibos/Exceptions/ConfigurationException.php
 - [x] Services/Fibos/Exceptions/FibosApiException.php
 
+### Factories & Interfaces (Priority: MEDIUM)
+- [x] Factories/CruiseRealTimeFactory.php
+- [ ] Interfaces/ICruiseRealTime.php (inferred)
+- [ ] Cruiseline-specific RealTime services (Msc, Royal, Ncl, etc.)
+
 ### Other Services (Priority: MEDIUM)
 - [ ] Services/Fibos/SyncService.php (parent class)
 - [ ] Services/Import/* (other importers)
@@ -98,12 +103,13 @@
 | Services Documented | 7 | ✅ Done |
 | Requests Documented | 3 | ✅ Done |
 | Exceptions Documented | 2 | ✅ Done |
+| Factories Documented | 1 | ✅ Done |
 | Models (estimated) | 18 | ⏳ Pending |
 | Controllers (estimated) | 5+ | ⏳ Pending |
 | Migrations (estimated) | 15+ | ⏳ Pending |
 | Routes | 2 | ⏳ Pending |
 | Configuration | 1 | ✅ Done |
-| **Total Known/Est** | **787+** | **~2.5% mapped** |
+| **Total Known/Est** | **787+** | **~2.7% mapped** |
 
 ---
 

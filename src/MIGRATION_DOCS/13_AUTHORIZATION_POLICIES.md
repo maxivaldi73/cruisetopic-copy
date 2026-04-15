@@ -83,6 +83,80 @@ protected $policies = [
 
 ---
 
+## HandlesSpatiePermissions Trait
+
+**Location:** `App\Policies\Traits\HandlesSpatiePermissions`  
+**Purpose:** Generic mapping of policy methods to Spatie permissions  
+**Package:** Spatie Laravel Permissions
+
+### How It Works
+
+Uses `__call()` magic method to automatically resolve Spatie permissions from policy method calls.
+
+**Ability Map (Method → Suffix):**
+```php
+viewAny      → index
+view         → show
+create       → create
+update       → edit
+delete       → delete
+restore      → restore
+forceDelete  → force_delete
+```
+
+**Permission Name Construction:**
+```
+{permissionPrefix}{suffix}
+// Example: "contract" + "edit" = "contract_edit"
+```
+
+### Properties
+
+#### `$permissionPrefix: string`
+- Default: `''` (empty)
+- Overridable per policy class
+- Example: `protected string $permissionPrefix = 'contract_';`
+
+#### `$abilityMap: array`
+- Maps policy method names to permission suffixes
+- Can be overridden in policy class
+
+### Usage Pattern
+
+**In Policy:**
+```php
+class ContractPolicy
+{
+    use HandlesSpatiePermissions;
+    
+    protected string $permissionPrefix = 'contract_';
+    // Now:
+    // update($user, $contract) → checks "contract_edit"
+    // delete($user, $contract) → checks "contract_delete"
+}
+```
+
+**In Controller:**
+```php
+// Automatically resolves via trait
+$this->authorize('update', $contract); 
+// → user->can('contract_edit')
+
+if (auth()->user()->can('delete', $contract)) {
+    // user->can('contract_delete')
+}
+```
+
+### How __call() Works
+
+1. **Receives:** Method name (e.g., 'update') + arguments (User, Model)
+2. **Extracts:** User from first argument
+3. **Maps:** Method name → suffix (update → edit)
+4. **Constructs:** Permission string (prefix + suffix)
+5. **Checks:** `$user->can($permission)`
+
+---
+
 ## Usage Pattern
 
 **In Controller:**
@@ -156,4 +230,4 @@ Or use entity-level RLS (Row-Level Security):
     }
   ]
 }
-``
+`

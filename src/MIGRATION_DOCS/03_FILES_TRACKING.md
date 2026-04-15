@@ -383,6 +383,11 @@
 ### Port Controller (1 file)
 - [x] Admin/Port/PortController.php
 
+### Itinerary Controllers (3 files)
+- [x] Admin/Itinerary/ItinerariesController.php
+- [x] Admin/Itinerary/ItineraryDestinationController.php
+- [x] Admin/Itinerary/ItineraryElementsController.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -452,7 +457,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 345 files documented
+### Total: 348 files documented
 
 ---
 

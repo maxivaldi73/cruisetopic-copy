@@ -102,6 +102,12 @@
 ### Testing Controllers (1 file)
 - [x] FibosTests.php
 
+### Materio UI Table Controllers (4 files)
+- [x] Materio/tables/Basic.php
+- [x] Materio/tables/DatatableBasic.php
+- [x] Materio/tables/DatatableAdvanced.php
+- [x] Materio/tables/DatatableExtensions.php
+
 ### UI Showcase Controllers - Materio/user_interface (19 files)
 - [x] Accordion.php
 - [x] Alerts.php

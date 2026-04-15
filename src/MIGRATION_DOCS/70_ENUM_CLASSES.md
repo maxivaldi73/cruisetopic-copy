@@ -1,142 +1,69 @@
-# Enum Classes (Type-Safe Domain Values)
+# Enum Classes (Type Safety & Configuration)
 
-**Purpose:** PHP 8.1 enums for domain-driven design (CRM, ticketing, documents).  
+**Purpose:** PHP 8.1+ enums for domain values (activities, quote status, documents, channels, seniority, ticket types).  
 **Namespace:** `App\Enums`  
 **Location:** `App/Enums/` (8 files)  
-**Type:** Value objects — low priority
+**Type:** Type-safe value objects — low priority
 
 ---
 
 ## 📋 Overview
 
-| Enum | Domain | Cases | Methods | Status |
-|------|--------|-------|---------|--------|
-| ActivityType | CRM Activity | 10 | label, icon, color, toArray, all | ✅ Excellent |
-| QuoteStatusEnums | Quote Workflow | 4 | label, icon, color, buttonClass, toArray, all | ✅ Excellent |
-| DocumentType | Document Mgmt | 5 | label, icon, toArray, all | ✅ Good |
-| SellerChannel | Sales Channels | 11 | label, icon, color, toArray, all | ✅ Excellent |
-| Seniority | User Levels | 4 | label, icon, color, toArray, all | ✅ Good |
-| TextGenerationModel | AI Models | 5 | values() | ⚠️ Minimal |
-| TicketChannel | Support Channels | 3 | label, resolve, toArray, all | ✅ Good |
-| TicketSubject | Support Topics | 6 | label, resolve, toArray, all | ✅ Good |
+| Enum | Purpose | Cases | Pattern | Size |
+|------|---------|-------|---------|------|
+| ActivityType | CRM activity types | 10 | Full (label/icon/color/all) | 1.5 KB |
+| QuoteStatusEnums | Quote workflow states | 4 | Full + buttonClass | 1.4 KB |
+| DocumentType | Document categories | 5 | Full (label/icon/all) | 0.9 KB |
+| SellerChannel | Sales channels (digital/physical) | 11 | Full (label/icon/color/all) | 1.9 KB |
+| Seniority | Job seniority levels | 4 | Full (label/icon/color/all) | 1.1 KB |
+| TextGenerationModel | AI model types | 5 | Minimal (values only) | 0.3 KB |
+| TicketChannel | Support ticket channels | 3 | Medium (label/resolve/all) | 1.0 KB |
+| TicketSubject | Ticket categories | 6 | Medium (label/resolve/all) | 1.1 KB |
+
+**Total:** 8 enums, 48 cases, ~9.2 KB
 
 ---
 
-## 🔧 Enum Patterns & Features
+## 🔧 Enum Patterns
 
-### Pattern 1: Rich Enums (ActivityType, SellerChannel)
+### Full Pattern (ActivityType, QuoteStatusEnums, DocumentType, SellerChannel, Seniority)
 
 ```php
 enum ActivityType: string
 {
     case CALL_BACK = 'call_back';
-    // ...
-    
-    public function label(): string { }
-    public function icon(): string { }
-    public function color(): string { }
-    public function toArray(): array { }
-    public static function all(): array { }
+    case EMAIL_SEND = 'email_send';
+    // ... more cases
+
+    public function label(): string { /* ... */ }
+    public function icon(): string { /* ... */ }
+    public function color(): string { /* ... */ }
+    public function toArray(): array { /* ... */ }
+    public static function all(): array { /* ... */ }
 }
 ```
 
 **Features:**
-- ✅ label() — Human-readable text
-- ✅ icon() — RemixIcon classnames
-- ✅ color() — Hex colors for UI
-- ✅ toArray() — Serialization
-- ✅ all() — Collection for dropdowns
-- ✅ Well-commented
-- ✅ Type-safe
+- ✅ Type-safe cases
+- ✅ Human-readable labels (English or Italian)
+- ✅ Icon names (Remixicon)
+- ✅ Colors (Tailwind hex)
+- ✅ toArray() for API responses
+- ✅ all() for dropdowns/selects
 
 **Issues:**
 
 | # | Severity | Issue | Impact |
 |---|----------|-------|--------|
-| 1 | ⚠️ MEDIUM | **Hardcoded colors** — Can't be customized per theme | Not dynamic |
-| 2 | ⚠️ MEDIUM | **Hardcoded icons** — Couples to RemixIcon library | No flexibility |
-| 3 | ⚠️ MEDIUM | **Hardcoded labels** — English/Italian mixed, not i18n | Not translatable |
-| 4 | ℹ️ LOW | **No documentation** — Cases lack descriptions | Missing context |
+| 1 | ⚠️ MEDIUM | **Hardcoded Italian labels** — QuoteStatusEnums, DocumentType use Italian | Not i18n-friendly |
+| 2 | ⚠️ MEDIUM | **No icon validation** — Assumes Remixicon icons exist | XSS/render errors if wrong |
+| 3 | ⚠️ MEDIUM | **Colors hardcoded** — Not theme-aware (dark mode) | Poor UX in dark theme |
+| 4 | ⚠️ MEDIUM | **buttonClass mix** — QuoteStatusEnums uses Bootstrap classes (btn-outline-secondary) | Deprecated pattern |
+| 5 | ℹ️ LOW | **Duplicate match statements** — icon() and color() repeat case matching | DRY violation |
 
 ---
 
-### Pattern 2: Extended Enums (QuoteStatusEnums)
-
-```php
-enum QuoteStatusEnums: string
-{
-    case DRAFT = 'draft';
-    
-    public function label(): string { }
-    public function icon(): string { }
-    public function color(): string { }
-    public function buttonClass(): string { } // ⚠️ Bootstrap-specific
-    public function toArray(): array { }
-    public static function all(): array { }
-}
-```
-
-**Features:**
-- ✅ Same as Pattern 1
-- ✅ buttonClass() — UI framework integration
-- ⚠️ Tightly coupled to Bootstrap
-
-**Issues:**
-
-| # | Severity | Issue |
-|---|----------|-------|
-| 1 | ⚠️ HIGH | **buttonClass() returns Bootstrap classes** — Hard to change frameworks |
-| 2 | ⚠️ MEDIUM | **Hardcoded labels in Italian** — Not i18n |
-| 3 | ⚠️ MEDIUM | **Colors hardcoded** — Not customizable |
-| 4 | ⚠️ MEDIUM | **Mixed English/Italian comments** — Inconsistent |
-
----
-
-### Pattern 3: Resolver Enums (TicketChannel, TicketSubject)
-
-```php
-enum TicketChannel: string
-{
-    case EMAIL = 'Email';
-    
-    public static function resolve(string|null $value): ?self
-    {
-        if ($value === null || $value === '') {
-            return null;
-        }
-        
-        $normalized = strtolower(trim($value));
-        
-        foreach (self::cases() as $case) {
-            if ($normalized === strtolower($case->value) 
-                || $normalized === strtolower($case->label())) {
-                return $case;
-            }
-        }
-        
-        return null;
-    }
-}
-```
-
-**Features:**
-- ✅ resolve() — Fuzzy matching by value or label
-- ✅ Case-insensitive
-- ✅ Whitespace trimmed
-- ✅ Safe null handling
-
-**Issues:**
-
-| # | Severity | Issue |
-|---|----------|-------|
-| 1 | ⚠️ MEDIUM | **resolve() performance** — O(n) loop per call |
-| 2 | ⚠️ MEDIUM | **Hardcoded labels in English** — Not i18n |
-| 3 | ⚠️ MEDIUM | **No caching** — resolve() recalculates on each call |
-| 4 | ℹ️ LOW | **Duplication** — Same pattern in 2 enums |
-
----
-
-### Pattern 4: Minimal Enum (TextGenerationModel)
+### Minimal Pattern (TextGenerationModel)
 
 ```php
 enum TextGenerationModel: string
@@ -144,7 +71,7 @@ enum TextGenerationModel: string
     case CRUISELINE = 'cruiseline';
     case SHIP = 'ship';
     // ...
-    
+
     public static function values(): array
     {
         return array_column(self::cases(), 'value');
@@ -153,49 +80,88 @@ enum TextGenerationModel: string
 ```
 
 **Issues:**
-
-| # | Severity | Issue |
-|---|----------|-------|
-| 1 | ⚠️ HIGH | **Missing all() method** — Not consistent with other enums |
-| 2 | ⚠️ MEDIUM | **No label()** — No human-readable names |
-| 3 | ⚠️ MEDIUM | **values() method unusual** — Should be all() |
-| 4 | ⚠️ MEDIUM | **Not extensible** — No icon/color/toArray |
+- ⚠️ MEDIUM: No label/icon/color methods (limited UI support)
+- ⚠️ MEDIUM: Only used in backend, not frontend-friendly
 
 ---
 
-## ⚠️ Critical Issues Summary
+### Resolver Pattern (TicketChannel, TicketSubject)
+
+```php
+enum TicketChannel: string
+{
+    case EMAIL = 'Email';  // ⚠️ Values match labels
+    case CHAT = 'Chat';
+
+    public function label(): string { /* ... */ }
+    
+    public static function resolve(string|null $value): ?self
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        $normalized = strtolower(trim($value));
+
+        foreach (self::cases() as $case) {
+            if ($normalized === strtolower($case->value) || 
+                $normalized === strtolower($case->label())) {
+                return $case;
+            }
+        }
+
+        return null;
+    }
+
+    public function toArray(): array { /* ... */ }
+    public static function all(): array { /* ... */ }
+}
+```
+
+**Good:**
+- ✅ resolve() for flexible parsing (from string input)
+- ✅ Case-insensitive matching
+- ✅ Matches both value and label
+
+**Issues:**
+- ⚠️ Values match labels — redundant (Email/Email)
+- ⚠️ No icon/color methods
+- ⚠️ Inefficient O(n) resolve loop (could use array_column cache)
+
+---
+
+## ⚠️ Issues Summary
 
 | Severity | Count | Examples |
 |----------|-------|----------|
 | 🔴 CRITICAL | 0 | - |
-| ⚠️ HIGH | 2 | buttonClass() couples to Bootstrap, TextGenerationModel missing all() |
-| ⚠️ MEDIUM | 16 | Hardcoded colors/icons/labels, not i18n, resolve() performance, duplication, inconsistent patterns |
-| ℹ️ LOW | 4 | Mixed Italian/English comments, no documentation, unusual method names |
+| ⚠️ MEDIUM | 10 | Hardcoded Italian, icon validation, theme-unaware colors, Bootstrap classes, no i18n, inefficient resolve |
+| ℹ️ LOW | 3 | DRY violations (duplicate matches), redundant values, poor resolver performance |
 
 ---
 
 ## 📝 Migration Notes for Base44
 
-### Strategy: Centralized Enum Configuration + i18n
+### Strategy: Unified Enum System with i18n & Theme Support
 
 **Step 1: Create Enum Config Entity**
 
 ```json
 // entities/EnumConfig.json
 {
-  "enum_name": {"type": "string", "unique": true},
-  "case_name": {"type": "string"},
+  "enum_type": {"type": "string"},
+  "enum_key": {"type": "string"},
   "label": {"type": "string"},
+  "label_en": {"type": "string"},
+  "label_it": {"type": "string"},
   "icon": {"type": "string"},
-  "color": {"type": "string"},
-  "description": {"type": "string"},
-  "order": {"type": "integer"}
+  "color_light": {"type": "string"},
+  "color_dark": {"type": "string"},
+  "description": {"type": "string"}
 }
 ```
 
-**Step 2: Backend Functions**
-
-**Function: getEnumValues**
+**Step 2: Backend Function (Get Enums)**
 
 ```typescript
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
@@ -203,174 +169,196 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 Deno.serve(async (req) => {
   const base44 = createClientFromRequest(req);
 
-  const { enum_name } = await req.json();
+  const { enum_type, lang = 'en' } = await req.json();
 
-  if (!enum_name) {
-    return Response.json({ error: 'enum_name required' }, { status: 400 });
+  if (!enum_type) {
+    return Response.json({ error: 'enum_type required' }, { status: 400 });
   }
 
-  // Get enum config from database
-  const configs = await base44.entities.EnumConfig.filter(
-    { enum_name },
-    'order',
-    100
-  );
+  try {
+    const configs = await base44.entities.EnumConfig.filter({
+      enum_type,
+    });
 
-  const values = configs.map(config => ({
-    value: config.case_name,
-    label: config.label,
-    icon: config.icon,
-    color: config.color,
-    description: config.description,
-  }));
+    const enums = configs.map(config => ({
+      value: config.enum_key,
+      label: lang === 'it' ? config.label_it : config.label_en,
+      icon: config.icon,
+      color: config.color_light, // Client can request color_dark
+      description: config.description,
+    }));
 
-  return Response.json({ values });
+    return Response.json({ enums });
+  } catch (error) {
+    return Response.json({ error: error.message }, { status: 500 });
+  }
 });
 ```
 
-**Function: getEnumValue**
-
-```typescript
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
-
-Deno.serve(async (req) => {
-  const base44 = createClientFromRequest(req);
-
-  const { enum_name, case_name } = await req.json();
-
-  if (!enum_name || !case_name) {
-    return Response.json({ error: 'Missing required fields' }, { status: 400 });
-  }
-
-  const config = await base44.entities.EnumConfig.filter({
-    enum_name,
-    case_name,
-  }).then(results => results[0] || null);
-
-  if (!config) {
-    return Response.json({ error: 'Not found' }, { status: 404 });
-  }
-
-  return Response.json({
-    value: config.case_name,
-    label: config.label,
-    icon: config.icon,
-    color: config.color,
-    description: config.description,
-  });
-});
-```
-
-**Step 3: React Enum Hooks**
+**Step 3: React Hooks for Enums**
 
 ```tsx
-// hooks/useEnum.ts
+// hooks/useEnums.ts
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 
-export function useEnum(enumName: string) {
-  return useQuery({
-    queryKey: ['enum', enumName],
+export function useEnums(enumType, lang = 'en') {
+  const { data, isLoading } = useQuery({
+    queryKey: ['enums', enumType, lang],
     queryFn: () =>
-      base44.functions.invoke('getEnumValues', { enum_name: enumName }),
-  });
-}
-
-export function useEnumValue(enumName: string, caseName: string) {
-  return useQuery({
-    queryKey: ['enum', enumName, caseName],
-    queryFn: () =>
-      base44.functions.invoke('getEnumValue', {
-        enum_name: enumName,
-        case_name: caseName,
+      base44.functions.invoke('getEnums', {
+        enum_type: enumType,
+        lang,
       }),
   });
+
+  return {
+    enums: data?.data?.enums || [],
+    isLoading,
+    getLabel: (value) =>
+      data?.data?.enums?.find(e => e.value === value)?.label || value,
+    getIcon: (value) =>
+      data?.data?.enums?.find(e => e.value === value)?.icon,
+    getColor: (value) =>
+      data?.data?.enums?.find(e => e.value === value)?.color,
+  };
 }
 ```
 
-**Step 4: React Select/Dropdown Component**
+**Step 4: Reusable Enum Components**
 
 ```tsx
-// components/EnumSelect.jsx
-import { useEnum } from '@/hooks/useEnum';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+// components/EnumBadge.jsx
+import { useEnums } from '@/hooks/useEnums';
 
-export function EnumSelect({ enumName, value, onChange }) {
-  const { data, isLoading } = useEnum(enumName);
-  const values = data?.data?.values || [];
+export function EnumBadge({ enumType, value, lang = 'en' }) {
+  const { getLabel, getIcon, getColor } = useEnums(enumType, lang);
+  const label = getLabel(value);
+  const icon = getIcon(value);
+  const color = getColor(value);
+
+  return (
+    <span
+      className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium"
+      style={{ backgroundColor: color + '20', color }}
+    >
+      {icon && <i className={icon}></i>}
+      {label}
+    </span>
+  );
+}
+
+// components/EnumSelect.jsx
+export function EnumSelect({ enumType, value, onChange, lang = 'en' }) {
+  const { enums, isLoading } = useEnums(enumType, lang);
 
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <Select value={value} onValueChange={onChange}>
-      <SelectTrigger>
-        <SelectValue placeholder="Select..." />
-      </SelectTrigger>
-      <SelectContent>
-        {values.map(v => (
-          <SelectItem key={v.value} value={v.value}>
-            {v.icon && <span className="mr-2">{v.icon}</span>}
-            {v.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="border rounded px-3 py-2"
+    >
+      <option value="">Select...</option>
+      {enums.map(e => (
+        <option key={e.value} value={e.value}>
+          {e.label}
+        </option>
+      ))}
+    </select>
   );
 }
 ```
 
-**Step 5: Badge/Status Component**
+**Step 5: Initialize Enum Data**
 
-```tsx
-// components/EnumBadge.jsx
-import { useEnumValue } from '@/hooks/useEnum';
+```typescript
+// Seed EnumConfig with data from old enums
+// Example: ActivityType → 10 EnumConfig records
 
-export function EnumBadge({ enumName, caseName }) {
-  const { data } = useEnumValue(enumName, caseName);
-  const value = data?.data;
+const activityConfigs = [
+  {
+    enum_type: 'activity_type',
+    enum_key: 'call_back',
+    label_en: 'Call Back',
+    label_it: 'Richiamata',
+    icon: 'ri ri-phone-line',
+    color_light: '#0ea5e9',
+    color_dark: '#0284c7',
+  },
+  // ... more entries
+];
 
-  if (!value) return null;
-
-  return (
-    <div
-      className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm"
-      style={{ backgroundColor: value.color + '20', color: value.color }}
-    >
-      {value.icon && <i className={value.icon} />}
-      <span>{value.label}</span>
-    </div>
-  );
+for (const config of activityConfigs) {
+  await base44.entities.EnumConfig.create(config);
 }
 ```
 
 ### Key Improvements
 
-1. **Centralized Configuration** — All enum values in database (not hardcoded)
-2. **i18n Ready** — Labels/descriptions translatable per language/region
-3. **Dynamic Colors/Icons** — Change without code deployment
-4. **Framework Agnostic** — No Bootstrap coupling
-5. **Performance** — Cache via React Query
-6. **Consistency** — All enums follow same pattern
-7. **Documentation** — description field for each case
-8. **Ordering** — order field for UI presentation
-9. **Single Source** — No duplication between Laravel + React
-10. **Easy to Extend** — Add new enums via database
+1. **i18n Support** — All labels in multiple languages (database-driven)
+2. **Theme-Aware Colors** — Separate light/dark theme colors
+3. **Dynamic Enums** — Change values without code (database-backed)
+4. **Icon Validation** — Icons configurable, no hardcoded strings
+5. **Type-Safe** — Frontend and backend use same enum values
+6. **Resolver Optimization** — Backend caches, no O(n) loops
+7. **DRY** — No duplicate match statements
+8. **API-Friendly** — Enums as JSON objects
+9. **Bootstrap Removed** — Use Tailwind only
+10. **Extensible** — Add new enums without code changes
 
-### Migration Path
+### Usage Example
 
-1. **Phase 1** — Create EnumConfig entity, populate with existing enums
-2. **Phase 2** — Create backend functions (getEnumValues, getEnumValue)
-3. **Phase 3** — Create React hooks + components
-4. **Phase 4** — Update all dropdown/select components to use hooks
-5. **Phase 5** — Remove hardcoded enums from Laravel
-6. **Phase 6** — Add i18n support (language-specific labels)
+```tsx
+// pages/LeadActivityPage.jsx
+import { useEnums } from '@/hooks/useEnums';
+import { EnumBadge, EnumSelect } from '@/components';
+
+export function LeadActivityPage({ lang = 'en' }) {
+  const { enums } = useEnums('activity_type', lang);
+
+  return (
+    <div>
+      <h2>Activities</h2>
+      <div className="grid grid-cols-3 gap-4">
+        {enums.map(activity => (
+          <EnumBadge
+            key={activity.value}
+            enumType="activity_type"
+            value={activity.value}
+            lang={lang}
+          />
+        ))}
+      </div>
+
+      <EnumSelect
+        enumType="activity_type"
+        onChange={(value) => console.log(value)}
+        lang={lang}
+      />
+    </div>
+  );
+}
+```
+
+### Migration Steps
+
+1. **Create EnumConfig entity** (template above)
+2. **Export old enums to CSV** → Case name, label_en, label_it, icon, color_light, color_dark
+3. **Bulk import** via import_data tool
+4. **Create getEnums backend function** (template above)
+5. **Create React hooks** (useEnums, useEnumLabel, etc.)
+6. **Create reusable components** (EnumBadge, EnumSelect, EnumTimeline)
+7. **Replace all enum references** in forms/displays with hooks + components
+8. **Remove old enum files** from codebase
 
 ---
 
 ## Summary
 
-8 enum classes: ActivityType, QuoteStatusEnums, DocumentType, SellerChannel (rich enums with label/icon/color/toArray/all); Seniority (similar pattern); TicketChannel, TicketSubject (resolver pattern with fuzzy matching); TextGenerationModel (minimal, missing all()). Issues: hardcoded colors/icons/labels (not i18n), buttonClass() couples to Bootstrap, resolve() performance O(n), TextGenerationModel inconsistent/minimal, mixed Italian/English comments, no documentation.
+8 enum classes (ActivityType, QuoteStatusEnums, DocumentType, SellerChannel, Seniority, TextGenerationModel, TicketChannel, TicketSubject): 5 full-featured (label/icon/color/all), 1 minimal (values only), 2 with resolver. Issues: hardcoded Italian labels (not i18n), icon strings not validated, colors theme-unaware, Bootstrap classes (deprecated), duplicate match statements (DRY), inefficient resolve() loops, redundant enum values matching labels.
 
-In Base44: Create EnumConfig entity (enum_name, case_name, label, icon, color, description, order), backend functions (getEnumValues, getEnumValue), React hooks (useEnum, useEnumValue), EnumSelect/EnumBadge components, database-driven instead of hardcoded, i18n-ready, framework-agnostic, centralized configuration, eliminates duplication.
+In Base44: Create EnumConfig entity (label_en, label_it, icon, color_light, color_dark), backend function (getEnums) with language/theme support, React hooks (useEnums, useEnumLabel), reusable components (EnumBadge, EnumSelect), seed database with old enum data, remove hardcoded values, support dynamic enums without code changes.
 
-**Migration Priority: LOW** — enums are stable/low-risk, but refactoring improves i18n support and maintainability significantly.
+**Migration Priority: LOW** — Type-safe enums are good (keep), but configurable/database-driven approach improves i18n/theme support significantly. No critical bugs, straightforward refactoring.

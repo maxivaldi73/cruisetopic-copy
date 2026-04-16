@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Ship, MapPin, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function FeaturedOffers() {
   const offers = [
@@ -108,7 +109,9 @@ export default function FeaturedOffers() {
         </div>
 
         <div className="text-center mt-8">
-          <Button variant="outline">Vedi tutte le offerte</Button>
+          <Link to="/offers">
+            <Button variant="outline">Vedi tutte le offerte</Button>
+          </Link>
         </div>
       </div>
     </section>

@@ -502,6 +502,7 @@
 - [x] DataTables/Cruise/CruisesDataTable.php
 - [x] DataTables/Cruise/CruisePricesDataTable.php
 - [x] DataTables/Cabin/CabinMappingDataTable.php
+- [x] Console/Kernel.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -572,7 +573,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 443 files documented
+### Total: 444 files documented
 
 ---
 

@@ -558,6 +558,10 @@
 - [x] Actions/Provider/Setting/StoreFibosSetting.php
 - [x] Actions/Provider/Setting/UpdateFibosSetting.php
 - [x] Actions/Provider/Port/ProviderMappingPort.php
+- [x] Actions/Provider/Cruiseline/IndexFibosCruiseline.php
+- [x] Actions/Product/DestroyProduct.php
+- [x] Actions/Product/IndexProduct.php
+- [x] Actions/Product/SaveProduct.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -628,7 +632,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 499 files documented
+### Total: 503 files documented
 
 ---
 

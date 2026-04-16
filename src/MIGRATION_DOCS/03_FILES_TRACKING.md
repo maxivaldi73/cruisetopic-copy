@@ -570,6 +570,13 @@
 - [x] Actions/Language/IndexLanguage.php
 - [x] Actions/Itinerary/ItineraryDestination/StoreItineraryDestination.php
 - [x] Actions/Itinerary/ItineraryDestination/DestroyItineraryDestination.php
+
+### Fortify Actions (5 files)
+- [x] Actions/Fortify/CreateNewUser.php
+- [x] Actions/Fortify/PasswordValidationRules.php (trait)
+- [x] Actions/Fortify/ResetUserPassword.php
+- [x] Actions/Fortify/UpdateUserPassword.php
+- [x] Actions/Fortify/UpdateUserProfileInformation.php
 - [x] Actions/InformationNote/IndexInformationNote.php
 
 ### Admin Controllers (68 files)
@@ -641,7 +648,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 512 files documented
+### Total: 517 files documented
 
 ---
 

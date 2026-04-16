@@ -586,6 +586,12 @@
 - [x] Actions/Cruise/UpdateBestForYouCruise.php
 - [x] Actions/Comment/DestroyComment.php
 - [x] Actions/Comment/SaveComment.php
+- [x] Actions/Cabin/EnableToggle.php
+- [x] Actions/Cabin/IndexCabinMapping.php
+- [x] Actions/Cabin/RemoveCabinExperience.php
+- [x] Actions/Cabin/RemoveCabinMapping.php
+- [x] Actions/Cabin/SetCabinExperience.php
+- [x] Actions/Cabin/SetCabinMapping.php
 
 ### Document Actions (2 files)
 - [x] Actions/Document/DestroyDocument.php
@@ -660,7 +666,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 527 files documented
+### Total: 533 files documented
 
 ---
 

@@ -541,6 +541,8 @@
 - [x] Console/Commands/ai/AIGenerateContentsCommand.php
 - [x] Casts/LocalDateTime.php
 - [x] Casts/LocalDate.php
+- [x] Actions/Website/DestroyWebsite.php
+- [x] Actions/Website/IndexWebsite.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -611,7 +613,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 482 files documented
+### Total: 484 files documented
 
 ---
 

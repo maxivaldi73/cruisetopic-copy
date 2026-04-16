@@ -5,12 +5,12 @@ export default function OfferCard({ offer }) {
   return (
     <div className="relative rounded-lg overflow-hidden group cursor-pointer h-64">
       {/* Background Image */}
-      <img 
+      <img
         src={offer.image}
         alt={offer.title}
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
       />
-      
+
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
@@ -45,7 +45,7 @@ export default function OfferCard({ offer }) {
         {/* Title and Stats */}
         <div>
           <h3 className="text-2xl font-bold text-white mb-4 leading-tight">{offer.title}</h3>
-          
+
           <div className="flex gap-6 mb-6 text-white text-sm">
             <div>
               <div className="text-2xl font-bold">{offer.cruises}</div>
@@ -57,12 +57,10 @@ export default function OfferCard({ offer }) {
             </div>
           </div>
 
-          {/* Description */}
           <p className="text-white text-xs line-clamp-2 mb-4 text-white/90">
             {offer.description}
           </p>
 
-          {/* CTA Button */}
           <Button className="bg-white text-primary hover:bg-white/90 font-semibold w-full sm:w-auto">
             Prenota adesso
           </Button>

@@ -46,44 +46,31 @@ export default function Reviews() {
   ];
 
   return (
-    <section className="py-16 bg-background">
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12">Recensioni</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <section className="py-16 px-4 bg-background">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold mb-8 text-center">Recensioni</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {reviews.map((review, idx) => (
-            <Card key={idx} className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <img 
-                  src={review.image}
-                  alt={review.name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
+            <Card key={idx} className="p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <img src={review.image} alt={review.name} className="w-10 h-10 rounded-full object-cover" />
                 <div>
-                  <p className="font-semibold text-sm">{review.name}</p>
-                  <p className="text-xs text-primary font-medium">{review.badge}</p>
+                  <div className="font-semibold text-sm">{review.name}</div>
+                  <div className="text-xs text-primary font-bold">{review.badge}</div>
                 </div>
               </div>
-
-              <div className="mb-3">
-                <p className="text-xs text-muted-foreground mb-1">{review.destination}</p>
-                <p className="text-sm font-semibold">{review.ship}</p>
-              </div>
-
-              <div className="flex gap-1 mb-3">
+              <div className="text-xs text-muted-foreground mb-1">{review.destination} • {review.ship}</div>
+              <div className="flex mb-2">
                 {[...Array(review.rating)].map((_, i) => (
                   <span key={i} className="text-yellow-400 text-sm">★</span>
                 ))}
               </div>
-
-              <p className="text-sm text-muted-foreground mb-3 line-clamp-3">{review.text}</p>
-              
-              <p className="text-xs text-muted-foreground">{review.date}</p>
+              <p className="text-sm text-muted-foreground mb-2">{review.text}</p>
+              <div className="text-xs text-muted-foreground">{review.date}</div>
             </Card>
           ))}
         </div>
-
-        <div className="text-center">
+        <div className="text-center mt-8">
           <Button variant="outline">Vedi tutte le recensioni</Button>
         </div>
       </div>

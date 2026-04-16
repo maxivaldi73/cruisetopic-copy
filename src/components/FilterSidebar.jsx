@@ -33,7 +33,6 @@ export default function FilterSidebar({ filters, setFilters }) {
           QUANDO
         </h3>
         <div className="bg-accent rounded-lg p-4">
-          {/* Calendar would go here - simplified */}
           <div className="text-sm text-muted-foreground">
             Seleziona date dal calendario
           </div>
@@ -47,13 +46,7 @@ export default function FilterSidebar({ filters, setFilters }) {
           PREZZO (notte a persona)
         </h3>
         <div className="space-y-3">
-          <Slider 
-            defaultValue={[150, 900]} 
-            min={0} 
-            max={2000} 
-            step={50}
-            className="w-full"
-          />
+          <Slider defaultValue={[150, 900]} min={0} max={2000} step={50} className="w-full" />
           <div className="flex justify-between text-sm">
             <span>€150</span>
             <span>€900</span>
@@ -68,13 +61,7 @@ export default function FilterSidebar({ filters, setFilters }) {
           DURATA (giorni)
         </h3>
         <div className="space-y-3">
-          <Slider 
-            defaultValue={[3, 10]} 
-            min={1} 
-            max={30} 
-            step={1}
-            className="w-full"
-          />
+          <Slider defaultValue={[3, 10]} min={1} max={30} step={1} className="w-full" />
           <div className="flex justify-between text-sm">
             <span>3 giorni</span>
             <span>10 giorni</span>
@@ -138,7 +125,7 @@ export default function FilterSidebar({ filters, setFilters }) {
         <button className="text-sm text-primary mt-2">più opzioni</button>
       </div>
 
-      {/* LOCALITTA' VISITABILI */}
+      {/* LOCALITÀ VISITABILI */}
       <div>
         <h3 className="font-semibold mb-4 flex items-center gap-2">
           <MapPin className="w-4 h-4" />

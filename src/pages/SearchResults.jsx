@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import SearchBar from '@/components/SearchBar';
 import FilterSidebar from '@/components/FilterSidebar';
 import CruiseCard from '@/components/CruiseCard';
-import { ChevronDown, MapPin, Ship } from 'lucide-react';
 
 const mockCruises = [
   {
@@ -54,39 +53,34 @@ export default function SearchResults() {
   return (
     <div className="min-h-screen bg-background">
       {/* Search Bar */}
-      <div className="bg-primary text-white py-6">
+      <div className="bg-primary py-8">
         <SearchBar />
       </div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Results Header */}
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex items-center justify-between mb-6">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-sm text-muted-foreground">Eccelente</span>
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-green-500">★</span>
-                ))}
-              </div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="font-bold text-green-600">Eccelente</span>
+              {[...Array(5)].map((_, i) => (
+                <span key={i} className="text-yellow-400">★</span>
+              ))}
               <span className="text-sm text-muted-foreground">1.148 recensioni su Trustpilot</span>
             </div>
             <h1 className="text-2xl font-bold">345 crociere in: Mediterraneo</h1>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Ordina per</span>
-            <select 
-              value={sortBy} 
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-border rounded-lg bg-background"
-            >
-              <option value="popularity">Popolarità</option>
-              <option value="price-low">Prezzo: Basso</option>
-              <option value="price-high">Prezzo: Alto</option>
-              <option value="rating">Valutazione</option>
-            </select>
-          </div>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="px-3 py-2 border border-border rounded-lg bg-background"
+          >
+            <option value="popularity">Popolarità</option>
+            <option value="price-asc">Prezzo: Basso</option>
+            <option value="price-desc">Prezzo: Alto</option>
+            <option value="rating">Valutazione</option>
+          </select>
         </div>
 
         <div className="flex gap-8">
@@ -96,32 +90,24 @@ export default function SearchResults() {
           </div>
 
           {/* Results Grid */}
-          <div className="flex-1">
-            <div className="space-y-6">
-              {cruises.map((cruise) => (
-                <CruiseCard key={cruise.id} cruise={cruise} />
-              ))}
-            </div>
+          <div className="flex-1 space-y-4">
+            {cruises.map((cruise) => (
+              <CruiseCard key={cruise.id} cruise={cruise} />
+            ))}
 
             {/* Load More */}
-            <div className="text-center mt-8">
-              <Button variant="outline" className="px-8">
+            <div className="text-center py-8">
+              <Button variant="outline" size="lg">
                 Carica altre offerte
               </Button>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* CTA Section */}
-      <div className="bg-accent py-12 mt-12">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-muted-foreground mb-4">
-            Un nostro consulente ti aiuterà ad selezionare esattamente ciò di cui hai bisogno. Siamo qui per aiutarti!
-          </p>
-          <Button className="bg-primary hover:bg-primary/90">
-            Chiama un consulente
-          </Button>
+            {/* CTA Section */}
+            <div className="bg-primary text-primary-foreground rounded-xl p-8 text-center">
+              <p className="mb-4">Un nostro consulente ti aiuterà ad selezionare esattamente ciò di cui hai bisogno. Siamo qui per aiutarti!</p>
+              <Button variant="secondary">Chiama un consulente</Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

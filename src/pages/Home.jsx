@@ -10,7 +10,7 @@ import Newsletter from '@/components/sections/Newsletter';
 
 export default function Home() {
   return (
-    <div className="w-full">
+    <div>
       <HeroSearch />
       <FeaturedOffers />
       <Destinations />

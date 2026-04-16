@@ -10,7 +10,7 @@ export default function WhyUs() {
     {
       icon: CreditCard,
       title: 'Pagamenti flessibili',
-      description: 'Prenota con un acconto e paga il resto un po\' per volta a interessi 0',
+      description: "Prenota con un acconto e paga il resto un po' per volta a interessi 0",
     },
     {
       icon: Heart,
@@ -25,20 +25,21 @@ export default function WhyUs() {
   ];
 
   return (
-    <section className="py-16 bg-accent">
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12 text-foreground">Perchè Cruisetopic</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="py-16 px-4 bg-muted/30">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-3xl font-bold mb-10 text-center">Perchè Cruisetopic</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, idx) => {
             const Icon = reason.icon;
             return (
-              <div key={idx} className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="mb-4">
-                  <Icon className="w-12 h-12 text-primary" />
+              <div key={idx} className="text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Icon className="w-8 h-8 text-primary" />
+                  </div>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2 text-lg">{reason.title}</h3>
-                <p className="text-sm text-muted-foreground">{reason.description}</p>
+                <h3 className="font-bold text-lg mb-2">{reason.title}</h3>
+                <p className="text-muted-foreground text-sm">{reason.description}</p>
               </div>
             );
           })}

@@ -6,48 +6,45 @@ export default function WhyCruisetopic() {
   const reasons = [
     {
       icon: Heart,
-      title: 'Prezzi',
+      title: 'Prezzi imbattibili',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis ligula ac leo pellentesque pellentesque.',
     },
     {
       icon: Users,
-      title: 'Prezzi',
+      title: 'Esperti di crociere',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis ligula ac leo pellentesque pellentesque.',
     },
     {
       icon: Shield,
-      title: 'Prezzi',
+      title: 'Sicurezza garantita',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis ligula ac leo pellentesque pellentesque.',
     },
     {
       icon: Users2,
-      title: 'Prezzi',
+      title: 'Assistenza 24/7',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis ligula ac leo pellentesque pellentesque.',
     },
   ];
 
   return (
-    <section className="py-16 bg-cyan-500">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl font-bold text-white">Perché Cruisetopic</h2>
-          <Button variant="outline" className="text-cyan-500 border-cyan-500 hover:bg-cyan-500/10">
-            Facile e sicuro →
-          </Button>
+    <section className="py-16 px-4 bg-muted/30">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-10">
+          <h2 className="text-3xl font-bold">Perché Cruisetopic</h2>
+          <Button variant="link" className="text-primary">Facile e sicuro →</Button>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, i) => {
             const Icon = reason.icon;
             return (
-              <div key={i} className="bg-cyan-400/20 rounded-lg p-8 text-white text-center">
+              <div key={i} className="text-center">
                 <div className="flex justify-center mb-4">
-                  <div className="bg-white/20 rounded-full p-6">
-                    <Icon className="w-8 h-8 text-white" />
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Icon className="w-8 h-8 text-primary" />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3">{reason.title}</h3>
-                <p className="text-sm text-white/90">{reason.description}</p>
+                <h3 className="font-bold text-lg mb-2">{reason.title}</h3>
+                <p className="text-muted-foreground text-sm">{reason.description}</p>
               </div>
             );
           })}

@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 export default function SearchBar() {
   return (
     <div className="max-w-7xl mx-auto px-4">
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
         <div>
           <label className="block text-sm font-medium text-white mb-2">Destinazione</label>
           <Select defaultValue="mediterranean">

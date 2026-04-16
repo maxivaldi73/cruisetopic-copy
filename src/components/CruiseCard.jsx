@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Heart, MapPin, Ship, Calendar, Share2, ChevronDown } from 'lucide-react';
+import { Heart, MapPin, Ship, Share2, ChevronDown } from 'lucide-react';
 
 export default function CruiseCard({ cruise }) {
   const [expanded, setExpanded] = useState(false);
@@ -13,12 +13,11 @@ export default function CruiseCard({ cruise }) {
         {/* Map Image */}
         <div className="w-64 flex-shrink-0">
           <div className="aspect-square bg-muted rounded-lg overflow-hidden relative">
-            <img 
+            <img
               src={cruise.mapImage}
               alt={cruise.destination}
               className="w-full h-full object-cover"
             />
-            {/* Map dots would go here */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-white text-center">
                 <div className="text-sm font-semibold mb-2">{cruise.destination.split(' ')[0]}</div>
@@ -41,8 +40,8 @@ export default function CruiseCard({ cruise }) {
               </div>
             </div>
             <div className="flex gap-2">
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="icon"
                 onClick={() => setLiked(!liked)}
                 className={liked ? 'text-red-500' : ''}
@@ -82,7 +81,7 @@ export default function CruiseCard({ cruise }) {
           {/* Dates and Prices */}
           <div className="mb-4">
             <div className="text-sm text-muted-foreground mb-2">Altre date disponibili:</div>
-            <div className="flex gap-2">
+            <div className="flex gap-4">
               {[cruise.departureDate, ...cruise.nextDates].map((date, i) => (
                 <div key={i} className="text-center">
                   <div className="text-xs text-muted-foreground">{date}</div>
@@ -104,8 +103,8 @@ export default function CruiseCard({ cruise }) {
               <Button className="bg-primary hover:bg-primary/90">
                 Blocca l'offerta
               </Button>
-              <Button variant="outline" size="icon">
-                <ChevronDown className="w-4 h-4" />
+              <Button variant="outline" size="icon" onClick={() => setExpanded(!expanded)}>
+                <ChevronDown className={`w-4 h-4 transition-transform ${expanded ? 'rotate-180' : ''}`} />
               </Button>
             </div>
           </div>

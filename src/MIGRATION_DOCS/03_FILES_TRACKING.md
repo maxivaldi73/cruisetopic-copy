@@ -550,6 +550,7 @@
 - [x] Actions/Task/SaveTask.php
 - [x] Actions/Quote/Status/DestroyQuoteStatus.php
 - [x] Actions/Provider/SyncJob/IndexSyncJob.php
+- [x] Actions/Provider/Ship/IndexShip.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -620,7 +621,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 491 files documented
+### Total: 492 files documented
 
 ---
 

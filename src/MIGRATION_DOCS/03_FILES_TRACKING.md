@@ -566,6 +566,7 @@
 - [x] Actions/Port/EditPort.php
 - [x] Actions/Port/IndexPort.php
 - [x] Actions/Port/StorePort.php
+- [x] Actions/Lead/Status/DestroyLeadStatus.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -636,7 +637,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 507 files documented
+### Total: 508 files documented
 
 ---
 

@@ -579,6 +579,10 @@
 - [x] Actions/Fortify/UpdateUserProfileInformation.php
 - [x] Actions/InformationNote/IndexInformationNote.php
 
+### Document Actions (2 files)
+- [x] Actions/Document/DestroyDocument.php
+- [x] Actions/Document/SaveDocument.php
+
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
 - [x] Admin/HomeController.php
@@ -648,7 +652,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 517 files documented
+### Total: 519 files documented
 
 ---
 

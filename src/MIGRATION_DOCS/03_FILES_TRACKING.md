@@ -570,6 +570,7 @@
 - [x] Actions/Language/IndexLanguage.php
 - [x] Actions/Itinerary/ItineraryDestination/StoreItineraryDestination.php
 - [x] Actions/Itinerary/ItineraryDestination/DestroyItineraryDestination.php
+- [x] Actions/InformationNote/IndexInformationNote.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -640,7 +641,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 511 files documented
+### Total: 512 files documented
 
 ---
 

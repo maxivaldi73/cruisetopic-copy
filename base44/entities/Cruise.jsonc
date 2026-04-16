@@ -1,0 +1,78 @@
+{
+  "name": "Cruise",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Unique sailing code"
+    },
+    "package": {
+      "type": "string",
+      "description": "Package identifier"
+    },
+    "cruiseline_id": {
+      "type": "string",
+      "description": "Reference to Cruiseline entity"
+    },
+    "ship_id": {
+      "type": "string",
+      "description": "Reference to Ship entity"
+    },
+    "itinerary_id": {
+      "type": "string",
+      "description": "Reference to Itinerary entity"
+    },
+    "departure_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Sailing departure date"
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration in days (nights + 1)"
+    },
+    "max_occupancy": {
+      "type": "integer",
+      "description": "Maximum passenger capacity"
+    },
+    "availability": {
+      "type": "boolean",
+      "default": true,
+      "description": "Available in search results"
+    },
+    "sellability": {
+      "type": "boolean",
+      "default": true,
+      "description": "Available for booking"
+    },
+    "is_immediate_confirm": {
+      "type": "boolean",
+      "default": false,
+      "description": "Instant confirmation available"
+    },
+    "best_for_you": {
+      "type": "boolean",
+      "default": false,
+      "description": "Manually flagged as recommended"
+    },
+    "best_price": {
+      "type": "number",
+      "description": "Lowest cabin price for this sailing"
+    },
+    "score": {
+      "type": "number",
+      "description": "Overall computed score"
+    },
+    "to_disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Wheelchair accessible"
+    }
+  },
+  "required": [
+    "code",
+    "departure_date",
+    "cruiseline_id",
+    "itinerary_id"
+  ]
+}

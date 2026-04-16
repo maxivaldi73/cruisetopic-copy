@@ -1,0 +1,69 @@
+{
+  "name": "Itinerary",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Unique itinerary code (hash of port sequence)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable itinerary name (e.g. 'Mediterranean Round Trip')"
+    },
+    "cruiseline_id": {
+      "type": "string",
+      "description": "Reference to Cruiseline entity"
+    },
+    "nights": {
+      "type": "integer",
+      "description": "Duration in nights"
+    },
+    "sea": {
+      "type": "boolean",
+      "default": true,
+      "description": "true = maritime, false = river"
+    },
+    "auto_rules": {
+      "type": "boolean",
+      "default": true,
+      "description": "Auto-generate pricing rules"
+    },
+    "departure_port_id": {
+      "type": "string",
+      "description": "Reference to departure Port entity"
+    },
+    "arrival_port_id": {
+      "type": "string",
+      "description": "Reference to arrival Port entity"
+    },
+    "departure_port_name": {
+      "type": "string",
+      "description": "Departure port name (denormalized for display)"
+    },
+    "arrival_port_name": {
+      "type": "string",
+      "description": "Arrival port name (denormalized for display)"
+    },
+    "destination_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "References to Destination entities"
+    },
+    "map_image_url": {
+      "type": "string",
+      "description": "URL to itinerary map image"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Active status"
+    }
+  },
+  "required": [
+    "code",
+    "cruiseline_id",
+    "nights"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Destination",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Destination display name"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "sea",
+        "river"
+      ],
+      "description": "Maritime or river destination"
+    },
+    "description": {
+      "type": "string",
+      "description": "Destination description"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Destination banner image URL"
+    },
+    "port_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of ports belonging to this destination"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Active status"
+    },
+    "sorting": {
+      "type": "integer",
+      "default": 0,
+      "description": "Display order"
+    }
+  },
+  "required": [
+    "name",
+    "type"
+  ]
+}

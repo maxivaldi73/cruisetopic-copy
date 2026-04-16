@@ -1,0 +1,78 @@
+{
+  "name": "Ship",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Unique ship code"
+    },
+    "name": {
+      "type": "string",
+      "description": "Ship name"
+    },
+    "cruiseline_id": {
+      "type": "string",
+      "description": "Reference to Cruiseline entity"
+    },
+    "description": {
+      "type": "string",
+      "description": "Ship description"
+    },
+    "main_image_url": {
+      "type": "string",
+      "description": "Main ship image URL"
+    },
+    "cover_image_url": {
+      "type": "string",
+      "description": "Cover image URL"
+    },
+    "image_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional ship images"
+    },
+    "year_built": {
+      "type": "integer",
+      "description": "Year the ship was built"
+    },
+    "gross_tonnage": {
+      "type": "integer",
+      "description": "Gross tonnage"
+    },
+    "passenger_capacity": {
+      "type": "integer",
+      "description": "Max passenger capacity"
+    },
+    "crew_size": {
+      "type": "integer",
+      "description": "Number of crew members"
+    },
+    "length_meters": {
+      "type": "number",
+      "description": "Ship length in meters"
+    },
+    "decks_count": {
+      "type": "integer",
+      "description": "Number of decks"
+    },
+    "amenities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of onboard amenities/services"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Active status"
+    }
+  },
+  "required": [
+    "code",
+    "name",
+    "cruiseline_id"
+  ]
+}

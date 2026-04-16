@@ -1,0 +1,65 @@
+{
+  "name": "Cruiseline",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Unique identifier code (e.g. COSTA, MSC, NCL)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Company display name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Long description"
+    },
+    "short_description": {
+      "type": "string",
+      "description": "Short marketing description"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "URL to company logo"
+    },
+    "logo_inverse_url": {
+      "type": "string",
+      "description": "URL to inverse/white logo"
+    },
+    "cover_url": {
+      "type": "string",
+      "description": "URL to cover image"
+    },
+    "website": {
+      "type": "string",
+      "description": "Company website URL"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Contact phone"
+    },
+    "address": {
+      "type": "string",
+      "description": "Physical address"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Active status"
+    },
+    "ships_count": {
+      "type": "integer",
+      "default": 0,
+      "description": "Cached count of ships"
+    },
+    "sorting": {
+      "type": "integer",
+      "default": 0,
+      "description": "Display order"
+    }
+  },
+  "required": [
+    "code",
+    "name"
+  ]
+}

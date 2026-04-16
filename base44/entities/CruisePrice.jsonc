@@ -1,0 +1,79 @@
+{
+  "name": "CruisePrice",
+  "type": "object",
+  "properties": {
+    "cruise_id": {
+      "type": "string",
+      "description": "Reference to Cruise entity"
+    },
+    "cabin_id": {
+      "type": "string",
+      "description": "Reference to cabin (optional)"
+    },
+    "category": {
+      "type": "string",
+      "description": "Cabin category code (e.g. IN, OV, BL, SU)"
+    },
+    "fare_code": {
+      "type": "string",
+      "description": "Fare code identifier"
+    },
+    "fare_desc": {
+      "type": "string",
+      "description": "Fare description"
+    },
+    "best_price": {
+      "type": "number",
+      "description": "Best/lowest price (LAF price)"
+    },
+    "price_pax1": {
+      "type": "number",
+      "description": "Price for 1 passenger"
+    },
+    "price_pax2": {
+      "type": "number",
+      "description": "Price for 2 passengers"
+    },
+    "price_pax3": {
+      "type": "number",
+      "description": "Price for 3 passengers"
+    },
+    "price_pax4": {
+      "type": "number",
+      "description": "Price for 4 passengers"
+    },
+    "price_pax5": {
+      "type": "number",
+      "description": "Price for 5 passengers"
+    },
+    "price_pax6": {
+      "type": "number",
+      "description": "Price for 6 passengers"
+    },
+    "tax_pax1": {
+      "type": "number",
+      "description": "Taxes for 1 passenger"
+    },
+    "tax_pax2": {
+      "type": "number",
+      "description": "Taxes for 2 passengers"
+    },
+    "cabin_price": {
+      "type": "number",
+      "description": "Total cabin price"
+    },
+    "total_price": {
+      "type": "number",
+      "description": "Total price including taxes"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Active/available for booking"
+    }
+  },
+  "required": [
+    "cruise_id",
+    "category"
+  ]
+}

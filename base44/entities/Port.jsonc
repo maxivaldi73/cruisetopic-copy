@@ -1,0 +1,82 @@
+{
+  "name": "Port",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Port name"
+    },
+    "country": {
+      "type": "string",
+      "description": "Country name"
+    },
+    "continent": {
+      "type": "string",
+      "description": "Continent name"
+    },
+    "region": {
+      "type": "string",
+      "description": "Region or area"
+    },
+    "city": {
+      "type": "string",
+      "description": "City name"
+    },
+    "lat": {
+      "type": "number",
+      "description": "Latitude coordinate"
+    },
+    "lng": {
+      "type": "number",
+      "description": "Longitude coordinate"
+    },
+    "description": {
+      "type": "string",
+      "description": "Port description"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "Port logo image URL"
+    },
+    "cover_url": {
+      "type": "string",
+      "description": "Port cover image URL"
+    },
+    "sunny_days": {
+      "type": "integer",
+      "description": "Average sunny days per year"
+    },
+    "temperature_avg": {
+      "type": "integer",
+      "description": "Average temperature in Celsius"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Active status"
+    },
+    "visible_on_map": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show on map"
+    },
+    "is_not_a_port": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if this is a landmark/stop, not a real port"
+    },
+    "score": {
+      "type": "integer",
+      "default": 0,
+      "description": "Preference/popularity score"
+    },
+    "sorting": {
+      "type": "integer",
+      "default": 0,
+      "description": "Display order"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

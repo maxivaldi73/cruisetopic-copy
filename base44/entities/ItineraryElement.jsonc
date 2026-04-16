@@ -1,0 +1,44 @@
+{
+  "name": "ItineraryElement",
+  "type": "object",
+  "properties": {
+    "itinerary_id": {
+      "type": "string",
+      "description": "Reference to Itinerary entity"
+    },
+    "port_id": {
+      "type": "string",
+      "description": "Reference to Port entity"
+    },
+    "port_name": {
+      "type": "string",
+      "description": "Port name (denormalized for display)"
+    },
+    "day_number": {
+      "type": "integer",
+      "description": "Day in the itinerary sequence (0 = embarkation)"
+    },
+    "arrival_time": {
+      "type": "string",
+      "description": "Arrival time (HH:MM)"
+    },
+    "departure_time": {
+      "type": "string",
+      "description": "Departure time (HH:MM)"
+    },
+    "is_overnight": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if the ship overnights in port"
+    },
+    "is_sea_day": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if this is a sea day (no port)"
+    }
+  },
+  "required": [
+    "itinerary_id",
+    "day_number"
+  ]
+}

@@ -581,6 +581,9 @@
 - [x] Actions/Destination/DestroyDestination.php
 - [x] Actions/Deal/IndexDeal.php
 - [x] Actions/Deal/EditDeal.php
+- [x] Actions/Cruise/IndexCruise.php
+- [x] Actions/Cruise/EditCruise.php
+- [x] Actions/Cruise/UpdateBestForYouCruise.php
 
 ### Document Actions (2 files)
 - [x] Actions/Document/DestroyDocument.php
@@ -655,7 +658,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 522 files documented
+### Total: 525 files documented
 
 ---
 

@@ -503,6 +503,34 @@
 - [x] DataTables/Cruise/CruisePricesDataTable.php
 - [x] DataTables/Cabin/CabinMappingDataTable.php
 - [x] Console/Kernel.php
+- [x] Console/Commands/AroyaSync.php
+- [x] Console/Commands/CheckEmptyFieldsCommand.php
+- [x] Console/Commands/ClearPortsCache.php
+- [x] Console/Commands/CostaSoapCommand.php
+- [x] Console/Commands/CostaSync.php
+- [x] Console/Commands/CreateLeadFollowUpTasksCommand.php
+- [x] Console/Commands/EnableAllItineraries.php
+- [x] Console/Commands/ExploraItinerariesTravelInfo.php
+- [x] Console/Commands/ExploraSync.php
+- [x] Console/Commands/ExploraSyncPrices.php
+- [x] Console/Commands/ExportMegaCruiselinesCommand.php
+- [x] Console/Commands/FibosSyncCommand.php
+- [x] Console/Commands/GenerateItineraryMediaCommand.php
+- [x] Console/Commands/ImportPortsCommand.php
+- [x] Console/Commands/ImportShipForCruiseline.php
+- [x] Console/Commands/MediaLibraryClean.php
+- [x] Console/Commands/MscSync.php
+- [x] Console/Commands/PortGeoFake.php
+- [x] Console/Commands/ProcessInboundEmailsCommand.php
+- [x] Console/Commands/RemoveLeadAssignmentCommand.php
+- [x] Console/Commands/TestCancellationCondition.php
+- [x] Console/Commands/TestEnableItineraries.php
+- [x] Console/Commands/TestInstallmentSetting.php
+- [x] Console/Commands/UpdateItinerariesDestination.php
+- [x] Console/Commands/UpdateLeadStatus.php
+- [x] Console/Commands/UpdatePricesCommand.php
+- [x] Console/Commands/UpdateWaitingLeads.php
+- [x] Console/Commands/UserCreate.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -573,7 +601,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 444 files documented
+### Total: 472 files documented
 
 ---
 

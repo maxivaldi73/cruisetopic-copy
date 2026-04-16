@@ -491,6 +491,7 @@
 - [x] DataTables/Language/LanguagesDataTable.php
 - [x] DataTables/Itinerary/ItinerariesDataTable.php
 - [x] DataTables/Itinerary/ItineraryElementsDataTable.php
+- [x] DataTables/InformationNote/InformationNotesDataTable.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -561,7 +562,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 432 files documented
+### Total: 433 files documented
 
 ---
 

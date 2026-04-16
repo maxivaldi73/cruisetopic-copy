@@ -494,6 +494,9 @@
 - [x] DataTables/InformationNote/InformationNotesDataTable.php
 - [x] DataTables/Experience/ExperienceDataTable.php
 - [x] DataTables/Destination/DestinationsDataTable.php
+- [x] DataTables/Deal/DealsDataTable.php
+- [x] DataTables/Deal/DealTypesDataTable.php
+- [x] DataTables/Deal/DealCruisesDataTable.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -564,7 +567,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 435 files documented
+### Total: 438 files documented
 
 ---
 

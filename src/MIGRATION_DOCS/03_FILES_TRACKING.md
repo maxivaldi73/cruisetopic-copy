@@ -531,6 +531,10 @@
 - [x] Console/Commands/UpdatePricesCommand.php
 - [x] Console/Commands/UpdateWaitingLeads.php
 - [x] Console/Commands/UserCreate.php
+- [x] Console/Commands/ports/RemovePortsWithNoItineraries.php
+- [x] Console/Commands/ports/SetPortCountry.php
+- [x] Console/Commands/ports/UpdatePortDestinations.php
+- [x] Console/Commands/ports/UpdatePortItineraries.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -601,7 +605,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 472 files documented
+### Total: 476 files documented
 
 ---
 

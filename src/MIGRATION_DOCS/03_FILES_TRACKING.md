@@ -578,6 +578,7 @@
 - [x] Actions/Fortify/UpdateUserPassword.php
 - [x] Actions/Fortify/UpdateUserProfileInformation.php
 - [x] Actions/InformationNote/IndexInformationNote.php
+- [x] Actions/Destination/DestroyDestination.php
 
 ### Document Actions (2 files)
 - [x] Actions/Document/DestroyDocument.php
@@ -652,7 +653,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 519 files documented
+### Total: 520 files documented
 
 ---
 

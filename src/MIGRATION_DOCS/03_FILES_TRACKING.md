@@ -551,6 +551,12 @@
 - [x] Actions/Quote/Status/DestroyQuoteStatus.php
 - [x] Actions/Provider/SyncJob/IndexSyncJob.php
 - [x] Actions/Provider/Ship/IndexShip.php
+- [x] Actions/Provider/Setting/CreateFibosSetting.php
+- [x] Actions/Provider/Setting/DestroyFibosSetting.php
+- [x] Actions/Provider/Setting/EditFibosSetting.php
+- [x] Actions/Provider/Setting/IndexFibosSetting.php
+- [x] Actions/Provider/Setting/StoreFibosSetting.php
+- [x] Actions/Provider/Setting/UpdateFibosSetting.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -621,7 +627,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 492 files documented
+### Total: 498 files documented
 
 ---
 

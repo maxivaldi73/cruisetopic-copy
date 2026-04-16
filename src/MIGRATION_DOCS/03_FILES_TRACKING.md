@@ -568,6 +568,8 @@
 - [x] Actions/Port/StorePort.php
 - [x] Actions/Lead/Status/DestroyLeadStatus.php
 - [x] Actions/Language/IndexLanguage.php
+- [x] Actions/Itinerary/ItineraryDestination/StoreItineraryDestination.php
+- [x] Actions/Itinerary/ItineraryDestination/DestroyItineraryDestination.php
 
 ### Admin Controllers (68 files)
 - [x] Admin/Controller.php (base)
@@ -638,7 +640,7 @@
 - [x] Admin/ReviewController.php
 - [x] Admin/BaseCrudController.php
 
-### Total: 509 files documented
+### Total: 511 files documented
 
 ---
 

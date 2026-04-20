@@ -4,46 +4,39 @@ export default function Inspirations() {
   const inspirations = [
     {
       name: 'Crociere di Avventura',
-      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop&q=80',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop',
     },
     {
       name: 'Crociere Culturali',
-      image: 'https://images.unsplash.com/photo-1555952517-2e8e729e0b44?w=600&h=400&fit=crop&q=80',
+      image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&h=300&fit=crop',
     },
     {
       name: 'Crociere Fluviali',
-      image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&h=400&fit=crop&q=80',
+      image: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=500&h=300&fit=crop',
     },
   ];
 
   return (
-    <section className="py-10 px-4 bg-background">
+    <section className="py-16 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">Ispirazioni</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {inspirations.map((item, idx) => (
-            <div
-              key={idx}
-              className="relative h-52 rounded-xl overflow-hidden cursor-pointer group"
-            >
+        <h2 className="text-3xl font-bold mb-8 text-center">Lasciati ispirare</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {inspirations.map((insp, idx) => (
+            <div key={idx} className="relative rounded-xl overflow-hidden group cursor-pointer h-56">
               <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                src={insp.image}
+                alt={insp.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-4 left-4">
-                <h3 className="text-white font-bold text-lg drop-shadow">{item.name}</h3>
+                <h3 className="text-white font-bold text-xl">{insp.name}</h3>
               </div>
             </div>
           ))}
         </div>
-
-        <div className="text-center mt-6">
-          <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-6 rounded-full">
-            Lasciati ispirare →
-          </Button>
+        <div className="text-center mt-8">
+          <Button variant="outline" size="lg">Visualizza tutti</Button>
         </div>
       </div>
     </section>

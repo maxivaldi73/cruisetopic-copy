@@ -1,67 +1,43 @@
-import { Button } from '@/components/ui/button';
-
 export default function CruiseLines() {
   const lines = [
-    { name: 'Costa', abbr: 'C', color: '#003087' },
-    { name: 'MSC', abbr: 'MSC', color: '#0066CC' },
-    { name: 'Norwegian', abbr: 'NCL', color: '#E30613' },
-    { name: 'Celebrity Cruise', abbr: 'X', color: '#003087' },
-    { name: 'Carnival', abbr: 'X', color: '#CC0000' },
-    { name: 'Princess Cruises', abbr: 'P', color: '#00529B' },
-    { name: 'Holland America', abbr: 'HA', color: '#003087' },
-    { name: 'Costa', abbr: 'C', color: '#003087' },
-    { name: 'MSC', abbr: 'MSC', color: '#0066CC' },
-    { name: 'Norwegian', abbr: 'NCL', color: '#E30613' },
-    { name: 'Carnival', abbr: 'X', color: '#CC0000' },
-    { name: 'Princess Cruises', abbr: 'P', color: '#00529B' },
-    { name: 'Costa', abbr: 'C', color: '#003087' },
-    { name: 'Celebrity Cruise', abbr: 'X', color: '#003087' },
-    { name: 'MSC', abbr: 'MSC', color: '#0066CC' },
-    { name: 'Holland America', abbr: 'HA', color: '#003087' },
+    { name: 'Costa', logo: 'https://images.unsplash.com/photo-1557696172-e657a3b9d76f?w=200&h=100&fit=crop' },
+    { name: 'MSC', logo: 'https://images.unsplash.com/photo-1557696172-e657a3b9d76f?w=200&h=100&fit=crop' },
+    { name: 'Royal Caribbean', logo: 'https://images.unsplash.com/photo-1557696172-e657a3b9d76f?w=200&h=100&fit=crop' },
+    { name: 'Norwegian', logo: 'https://images.unsplash.com/photo-1557696172-e657a3b9d76f?w=200&h=100&fit=crop' },
+    { name: 'Celebrity', logo: 'https://images.unsplash.com/photo-1557696172-e657a3b9d76f?w=200&h=100&fit=crop' },
+    { name: 'Princess', logo: 'https://images.unsplash.com/photo-1557696172-e657a3b9d76f?w=200&h=100&fit=crop' },
+    { name: 'Carnival', logo: 'https://images.unsplash.com/photo-1557696172-e657a3b9d76f?w=200&h=100&fit=crop' },
+    { name: 'Holland America', logo: 'https://images.unsplash.com/photo-1557696172-e657a3b9d76f?w=200&h=100&fit=crop' },
   ];
 
   return (
-    <section className="py-12 px-4" style={{ background: 'linear-gradient(135deg, hsl(221, 90%, 40%) 0%, hsl(195, 80%, 48%) 100%)' }}>
+    <section className="py-16 px-4 bg-background">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl font-bold text-white">Compagnie</h2>
-          <div className="hidden md:flex gap-8 text-white">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold mb-4">Compagnie</h2>
+          <div className="flex justify-center gap-12 text-muted-foreground">
             <div className="text-center">
-              <div className="text-2xl font-black">28</div>
-              <div className="text-xs text-white/70">navi</div>
+              <div className="text-3xl font-bold text-foreground">28</div>
+              <div className="text-sm">navi</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-black">2463</div>
-              <div className="text-xs text-white/70">partenze all'anno</div>
+              <div className="text-3xl font-bold text-foreground">2463</div>
+              <div className="text-sm">partenze all'anno</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-black">692</div>
-              <div className="text-xs text-white/70">rotte</div>
+              <div className="text-3xl font-bold text-foreground">692</div>
+              <div className="text-sm">rotte</div>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
           {lines.map((line, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-lg p-3 flex flex-col items-center justify-center cursor-pointer hover:shadow-lg transition-shadow"
-            >
-              <div
-                className="w-10 h-8 rounded flex items-center justify-center mb-1.5 text-white font-black text-xs"
-                style={{ backgroundColor: line.color }}
-              >
-                {line.abbr}
-              </div>
-              <span className="text-[10px] text-muted-foreground text-center leading-tight">{line.name}</span>
+            <div key={idx} className="flex flex-col items-center justify-center p-4 border border-border rounded-lg hover:shadow-md transition-shadow cursor-pointer">
+              <img src={line.logo} alt={line.name} className="w-16 h-10 object-cover rounded mb-2" />
+              <span className="text-xs text-muted-foreground text-center">{line.name}</span>
             </div>
           ))}
-        </div>
-
-        <div className="text-center mt-8">
-          <Button className="bg-white text-primary hover:bg-white/90 font-semibold px-6 rounded-full">
-            Crociere Last Minute
-          </Button>
         </div>
       </div>
     </section>
